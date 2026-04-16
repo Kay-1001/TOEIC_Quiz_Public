@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1c1916">
+<title>TOEIC 語彙・文法 100問</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f5f1e8;
+    --paper-warm: #ebe5d6;
+    --ink: #1c1916;
+    --ink-soft: #3a3530;
+    --muted: #6b6456;
+    --rule: #d4cdba;
+    --rule-soft: #e3ddcc;
+    --accent: #8b2332;
+    --accent-soft: #a84658;
+    --correct: #2f5d2f;
+    --correct-soft: #d9e5d5;
+    --wrong: #8b2332;
+    --wrong-soft: #ead5d8;
+    --shadow: 0 1px 2px rgba(28,25,22,.04), 0 4px 16px rgba(28,25,22,.06);
+    --serif-en: 'Fraunces', 'Noto Serif JP', Georgia, serif;
+    --serif-jp: 'Noto Serif JP', 'Yu Mincho', serif;
+    --sans-jp: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Hiragino Sans', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans-jp);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+    min-height: 100vh;
+  }
+
+  body {
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(139,35,50,.03), transparent 40%),
+      radial-gradient(circle at 80% 90%, rgba(47,93,47,.03), transparent 40%);
+  }
+
+  .app {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 24px 20px 80px;
+    min-height: 100vh;
+  }
+
+  /* === HEADER === */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .brand {
+    font-family: var(--serif-en);
+    font-weight: 500;
+    font-style: italic;
+    font-size: 1.1rem;
+    letter-spacing: .02em;
+    color: var(--ink);
+  }
+
+  .brand-sub {
+    font-family: var(--sans-jp);
+    font-size: .75rem;
+    color: var(--muted);
+    margin-left: 10px;
+    font-style: normal;
+    letter-spacing: .05em;
+  }
+
+  .meta {
+    font-family: var(--serif-en);
+    font-size: .85rem;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* === PROGRESS BAR === */
+  .progress-wrap {
+    margin-bottom: 32px;
+  }
+
+  .progress-bar {
+    height: 3px;
+    background: var(--rule-soft);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--ink);
+    transition: width .4s cubic-bezier(.4,0,.2,1);
+  }
+
+  .progress-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-family: var(--serif-en);
+    font-size: .8rem;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .progress-stats strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* === START SCREEN === */
+  .start {
+    padding: 40px 0;
+    text-align: left;
+  }
+
+  .start-eyebrow {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--accent);
+    margin-bottom: 8px;
+    letter-spacing: .02em;
+  }
+
+  .start-title {
+    font-family: var(--serif-jp);
+    font-size: clamp(1.8rem, 5vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 4px;
+    letter-spacing: -.01em;
+  }
+
+  .start-title-en {
+    font-family: var(--serif-en);
+    font-size: clamp(1.3rem, 4vw, 1.8rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+    letter-spacing: -.01em;
+  }
+
+  .start-desc {
+    font-size: .95rem;
+    color: var(--ink-soft);
+    max-width: 540px;
+    margin-bottom: 32px;
+    line-height: 1.75;
+  }
+
+  .start-specs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin-bottom: 40px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .spec {
+    padding: 16px 14px;
+    border-right: 1px solid var(--rule);
+  }
+  .spec:last-child { border-right: none; }
+
+  .spec-label {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: .7rem;
+    color: var(--muted);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .spec-value {
+    font-family: var(--serif-en);
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    font-family: var(--sans-jp);
+    font-size: 1rem;
+    font-weight: 500;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    cursor: pointer;
+    letter-spacing: .02em;
+    transition: transform .15s, background .15s;
+  }
+
+  .btn:hover { background: var(--ink-soft); }
+  .btn:active { transform: translateY(1px); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+    padding: 13px 27px;
+  }
+  .btn-ghost:hover { background: var(--ink); color: var(--paper); }
+
+  .btn-arrow {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: 1.05rem;
+  }
+
+  .btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .resume-note {
+    background: var(--paper-warm);
+    padding: 14px 16px;
+    margin-bottom: 20px;
+    font-size: .85rem;
+    color: var(--ink-soft);
+    border-left: 3px solid var(--accent);
+  }
+
+  /* === QUIZ SCREEN === */
+  .question-num {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: .85rem;
+    color: var(--muted);
+    letter-spacing: .05em;
+    margin-bottom: 12px;
+  }
+
+  .question-num::before {
+    content: "—— ";
+    color: var(--rule);
+  }
+
+  .question {
+    font-family: var(--serif-en);
+    font-size: clamp(1.15rem, 3.5vw, 1.4rem);
+    line-height: 1.6;
+    margin-bottom: 28px;
+    color: var(--ink);
+    font-weight: 400;
+    letter-spacing: -.005em;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  .option {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 18px;
+    background: transparent;
+    border: 1px solid var(--rule);
+    text-align: left;
+    cursor: pointer;
+    font-family: var(--serif-en);
+    font-size: 1.02rem;
+    color: var(--ink);
+    transition: all .15s;
+    width: 100%;
+    line-height: 1.4;
+  }
+
+  .option:hover:not(:disabled) {
+    border-color: var(--ink);
+    background: var(--paper-warm);
+  }
+
+  .option:disabled { cursor: default; }
+
+  .option-letter {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-weight: 500;
+    color: var(--muted);
+    min-width: 20px;
+    flex-shrink: 0;
+  }
+
+  .option-text {
+    flex: 1;
+  }
+
+  .option.correct {
+    border-color: var(--correct);
+    background: var(--correct-soft);
+    color: var(--correct);
+  }
+  .option.correct .option-letter { color: var(--correct); }
+
+  .option.wrong {
+    border-color: var(--wrong);
+    background: var(--wrong-soft);
+    color: var(--wrong);
+  }
+  .option.wrong .option-letter { color: var(--wrong); }
+
+  .option.dimmed {
+    opacity: .55;
+  }
+
+  /* === FEEDBACK === */
+  .feedback {
+    margin-top: 8px;
+    padding: 20px 22px;
+    border-left: 3px solid var(--ink);
+    background: var(--paper-warm);
+    animation: slideIn .3s ease-out;
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .feedback.correct { border-left-color: var(--correct); }
+  .feedback.wrong { border-left-color: var(--wrong); }
+
+  .feedback-verdict {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+    letter-spacing: .02em;
+  }
+
+  .feedback.correct .feedback-verdict { color: var(--correct); }
+  .feedback.wrong .feedback-verdict { color: var(--wrong); }
+
+  .feedback-verdict-jp {
+    font-family: var(--sans-jp);
+    font-size: .75rem;
+    font-weight: 500;
+    font-style: normal;
+    color: var(--muted);
+    margin-left: 8px;
+    letter-spacing: .05em;
+  }
+
+  .feedback-body {
+    font-size: .92rem;
+    line-height: 1.75;
+    color: var(--ink-soft);
+  }
+
+  .feedback-correct-answer {
+    font-family: var(--serif-en);
+    color: var(--ink);
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  /* === NAV === */
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 28px;
+    gap: 12px;
+  }
+
+  .nav-quit {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: .85rem;
+    color: var(--muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px 4px;
+    text-decoration: underline;
+    text-decoration-color: var(--rule);
+    text-underline-offset: 4px;
+  }
+  .nav-quit:hover { color: var(--ink); }
+
+  /* === RESULTS === */
+  .results {
+    padding: 20px 0;
+  }
+
+  .results-eyebrow {
+    font-family: var(--serif-en);
+    font-style: italic;
+    color: var(--accent);
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+
+  .results-title {
+    font-family: var(--serif-jp);
+    font-size: clamp(1.8rem, 5vw, 2.4rem);
+    font-weight: 700;
+    margin-bottom: 32px;
+    line-height: 1.25;
+  }
+
+  .score-display {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+
+  .score-big {
+    font-family: var(--serif-en);
+    font-size: clamp(4rem, 14vw, 6rem);
+    font-weight: 300;
+    line-height: 1;
+    color: var(--ink);
+    letter-spacing: -.02em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .score-big sup {
+    font-size: .4em;
+    font-style: italic;
+    color: var(--muted);
+    font-weight: 400;
+    margin-left: 4px;
+  }
+
+  .score-label {
+    font-family: var(--serif-en);
+    font-style: italic;
+    color: var(--muted);
+    font-size: 1rem;
+  }
+
+  .score-breakdown {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin: 32px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .score-cell {
+    padding: 16px 12px;
+    border-right: 1px solid var(--rule);
+  }
+  .score-cell:last-child { border-right: none; }
+
+  .score-cell-label {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: .7rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: 4px;
+  }
+
+  .score-cell-value {
+    font-family: var(--serif-en);
+    font-size: 1.4rem;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .score-cell.correct .score-cell-value { color: var(--correct); }
+  .score-cell.wrong .score-cell-value { color: var(--wrong); }
+
+  .results-msg {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+
+  /* === REVIEW LIST === */
+  .review-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .review-title {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--ink);
+  }
+
+  .review-title-jp {
+    font-family: var(--sans-jp);
+    font-size: .8rem;
+    color: var(--muted);
+    margin-left: 8px;
+    letter-spacing: .05em;
+  }
+
+  .review-count {
+    font-family: var(--serif-en);
+    font-size: .85rem;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* === UTILITIES === */
+  .hidden { display: none !important; }
+
+  .footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: .75rem;
+    color: var(--muted);
+    letter-spacing: .03em;
+  }
+
+  /* Mobile tweaks */
+  @media (max-width: 520px) {
+    .app { padding: 20px 16px 60px; }
+    .start-specs, .score-breakdown {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .spec, .score-cell { padding: 12px 8px; }
+    .spec-value, .score-cell-value { font-size: 1.15rem; }
+    .question { font-size: 1.1rem; }
+    .option { font-size: .98rem; padding: 12px 14px; }
+    .btn { padding: 12px 22px; font-size: .95rem; }
+  }
+
+  /* Print-like paper texture subtle */
+  .app::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle at 1px 1px, rgba(28,25,22,.015) 1px, transparent 0);
+    background-size: 3px 3px;
+    z-index: 0;
+  }
+  .app > * { position: relative; z-index: 1; }
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
+
+<script>
+// =============================================================================
+// QUESTION DATA
+// =============================================================================
+const QUESTIONS = [];
+const QUESTIONS_DATA = [
+  {
+    q: "The meeting was cancelled, but we decided to hold a brief discussion _____.",
+    opts: ["although", "however", "anyway", "despite"],
+    ans: 3,
+    exp: "anyway は「とにかく、それでも」を表す文末副詞。although/despite は接続詞・前置詞で節や名詞句を従える。however は副詞だが文頭・文中の位置が一般的。文末で「それでも」の含意を出せるのは anyway のみ。"
+  },
+  {
+    q: "_____ the CEO's announcement, shares of the company rose sharply.",
+    opts: ["Followed", "Following", "Follows", "Follow"],
+    ans: 2,
+    exp: "Following + N で「～に続いて、～の後で」という前置詞的用法。After とほぼ同義。Follows（三単現）・Follow（原形）・Followed（過去/過去分詞）はいずれも文法構造に合わない。"
+  },
+  {
+    q: "Please _____ the user manual for detailed installation instructions.",
+    opts: ["look for", "point at", "notice of", "refer to"],
+    ans: 4,
+    exp: "refer to は「～を参照する、参考にする」。refer は自動詞なので前置詞 to が必要。look for（探す）、point at（物理的に指差す）は意味不適。notice of は動詞＋前置詞の組み合わせとして成立しない。"
+  },
+  {
+    q: "The latest financial report is now _____ on the company website.",
+    opts: ["available", "possible", "capable", "reachable"],
+    ans: 1,
+    exp: "available は「入手可能な、利用できる」。報告書がサイト上で閲覧できる状態を表す。possible は「起こりうる」、capable は「（人・物が）能力を持つ」、reachable は「到達可能な」で物理的・抽象的距離を指すため不自然。"
+  },
+  {
+    q: "Please submit your vacation request to the Human Resources _____ by Friday.",
+    opts: ["application", "committee", "department", "interview"],
+    ans: 3,
+    exp: "Human Resources Department（人事部）は組織の部署名として定型。committee（委員会）は特定目的の合議体、interview（面接）と application（申請書）は別カテゴリの名詞。"
+  },
+  {
+    q: "The annual sales _____ will be held in Chicago next month.",
+    opts: ["appointment", "conference", "interview", "session"],
+    ans: 2,
+    exp: "conference は大規模な会議・カンファレンス。annual sales conference は営業関連の年次会合として定型。appointment は個人的な予約、interview は面接、session は会期や一コマの会合で、大規模な年次会合には通常使わない。"
+  },
+  {
+    q: "_____ the latest survey, customer satisfaction has improved significantly.",
+    opts: ["According to", "Based with", "Depending on", "Regardless of"],
+    ans: 1,
+    exp: "According to ～「～によれば」は情報源を示す定型句。Based with は誤用（正しくは based on）、Depending on は「～次第で」、Regardless of は「～に関係なく」で意味が合わない。"
+  },
+  {
+    q: "Given the current market conditions, prices are _____ to rise next quarter.",
+    opts: ["possible", "probable", "available", "likely"],
+    ans: 4,
+    exp: "be likely to do「～しそうである」の構文。likely は形容詞＋to不定詞をとれる。possible と probable はこの構文では不自然で、通常 It is possible/probable that ～ の形をとる。available は意味不適。"
+  },
+  {
+    q: "As part of the promotion, the company will _____ a 20% discount to loyal customers.",
+    opts: ["afford", "offer", "spend", "cost"],
+    ans: 2,
+    exp: "offer O to O'「顧客に割引を提供する」の構文。afford は「余裕がある」、spend は「使う」、cost は「費用がかかる」で、割引を提供する意味にはならない。"
+  },
+  {
+    q: "The factory recently installed new _____ to improve efficiency.",
+    opts: ["equipments", "equipment", "an equipment", "equipping"],
+    ans: 2,
+    exp: "equipment は不可算名詞。複数形 equipments や不定冠詞 an equipment は文法的に誤り。equipping（動名詞）も new equipment の位置には合わない。TOEIC頻出の不可算名詞。"
+  },
+  {
+    q: "The hotel will _____ complimentary breakfast for all registered guests.",
+    opts: ["propose", "prepare for", "provide", "present with"],
+    ans: 3,
+    exp: "provide は「（物・サービス）を提供する」。propose は「提案する」で計画やアイデアが対象。prepare for は「～のために準備する」で直接目的語ではなく前置詞を挟む。present with は「人に～を贈呈する」で目的語の順序が異なる。"
+  },
+  {
+    q: "Many residents prefer to shop at _____ stores rather than large chain supermarkets.",
+    opts: ["native", "inner", "personal", "local"],
+    ans: 4,
+    exp: "local は「地元の、地域の」。大手チェーンとの対比として local stores（地元の店）が自然。native は「原産の、生まれつきの」、inner は「内側の」、personal は「個人の」で店舗を修飾する語として不適。"
+  },
+  {
+    q: "Customers who _____ items online can track their orders through our website.",
+    opts: ["purchase", "pay", "order for", "buy of"],
+    ans: 1,
+    exp: "purchase は「購入する」で他動詞、直接目的語をとる。pay は pay for ～（～の代金を払う）の形、order は通常 for 不要、buy of は非標準。purchase が最も直接的で自然。"
+  },
+  {
+    q: "The grand _____ of the new store will take place next Saturday.",
+    opts: ["beginning", "opening", "starting", "origin"],
+    ans: 2,
+    exp: "grand opening は「（新店舗の）グランドオープン」の定型句。beginning や starting は「動作の開始」に近く、origin は「起源」で店舗開業の意味にならない。"
+  },
+  {
+    q: "The _____ of the new office building will be completed by December.",
+    opts: ["construct", "constructive", "construction", "constructed"],
+    ans: 3,
+    exp: "the ___ of ～ の空所には名詞が入る。construct は動詞、constructive は形容詞（建設的な）、constructed は過去分詞。名詞の construction（建設）のみが文法的に適合。"
+  },
+  {
+    q: "The factory offers a free guided _____ of its production line every Friday.",
+    opts: ["tour", "trip", "journey", "pathway"],
+    ans: 1,
+    exp: "guided tour は「ガイド付き見学」の定型。工場見学の意味で自然。trip は「短い旅行」、journey は「長旅・道のり」、pathway は「小道・経路」で、案内付きの見学の意味にはならない。"
+  },
+  {
+    q: "The company invested heavily in _____ and development last year.",
+    opts: ["researches", "researching", "researcher", "research"],
+    ans: 4,
+    exp: "research は通常不可算名詞で、複数形 researches は学術的・古い用法に限られる。research and development（研究開発、R&D）は定型句。researcher は「研究者」、researching は動名詞で and development との並列に不自然。"
+  },
+  {
+    q: "All managers are required to _____ the quarterly planning meeting.",
+    opts: ["attend to", "attend", "participate", "join in"],
+    ans: 2,
+    exp: "attend「出席する」は他動詞で、直接目的語をとる。attend to は「～の世話をする、対処する」で意味が異なる。participate は participate in、join in も in が必要で、前置詞なしの meeting を直接目的語にとれない。"
+  },
+  {
+    q: "Our company offers free next-day _____ to all customers within the city.",
+    opts: ["delivery", "deliver", "to deliver", "delivering"],
+    ans: 1,
+    exp: "next-day delivery は「翌日配達」の定型句。offer の目的語として名詞が必要。deliver は動詞、to deliver と delivering は名詞句の主要部には通常使わない。"
+  },
+  {
+    q: "The marketing team _____ launched a new advertising campaign.",
+    opts: ["nowadays", "at present", "recently", "since"],
+    ans: 3,
+    exp: "recently は過去形・現在完了と共起する副詞。nowadays は「今日では」で現在時制や一般的傾向、at present は「現在（は）」で現在時制と共起。since は前置詞・接続詞で副詞単独では使えない。"
+  },
+  {
+    q: "The survey results _____ that customer satisfaction has improved.",
+    opts: ["point to", "inform of", "suggest about", "indicate"],
+    ans: 4,
+    exp: "indicate は「示す」で that 節を直接とれる他動詞。point to は that 節を従えず名詞句を目的語にする、inform of は「人 + of + 物」の形で人目的語が必要、suggest は about を取らない（suggest that ～）。"
+  },
+  {
+    q: "Every _____ must complete the safety training before starting work.",
+    opts: ["employee", "employer", "employment", "employing"],
+    ans: 1,
+    exp: "employee は「従業員」。training を受ける主語として適切。employer は「雇用主」、employment は「雇用（制度・状態）」、employing は動名詞・現在分詞で every の後には来ない。"
+  },
+  {
+    q: "Please contact customer service if you need _____ information.",
+    opts: ["added", "additional", "adding", "addition"],
+    ans: 2,
+    exp: "additional は形容詞「追加の」で information を修飾する定型。added は過去分詞で「加えられた」の結果的意味、adding は動名詞、addition は名詞で、ここでは形容詞が必要。"
+  },
+  {
+    q: "We conducted a customer satisfaction _____ to identify areas for improvement.",
+    opts: ["investigation", "examination", "survey", "observation"],
+    ans: 3,
+    exp: "customer satisfaction survey は「顧客満足度調査」の定型句。investigation は犯罪・事故の「捜査」、examination は「試験・検査」、observation は「観察」で、意見・満足度の調査の意味にならない。"
+  },
+  {
+    q: "Managers are expected to _____ employee performance on a quarterly basis.",
+    opts: ["review", "observe", "remind", "respect"],
+    ans: 1,
+    exp: "review は「評価する、見直す」。review employee performance（従業員の業績を評価する）は定型。observe は「観察する」、remind は「思い出させる」、respect は「尊重する」で、四半期評価の文脈に合わない。"
+  },
+  {
+    q: "Due to increased demand, _____ will be scaled up next month.",
+    opts: ["producing", "product", "produced", "production"],
+    ans: 4,
+    exp: "production は「生産（量）」で、be scaled up（規模拡大される）の主語になる。producing は動名詞（主語化できるが動作寄り）、product は「製品」、produced は過去分詞で主語にならない。"
+  },
+  {
+    q: "The new branch office will be _____ near the central train station.",
+    opts: ["laid", "located", "set on", "put"],
+    ans: 2,
+    exp: "be located「位置する」の定型。建物や施設の所在を表す。laid は「（物が）置かれた」で建物には使わない。set on は「～に向けられた」で文脈不適。put も建物の立地には通常使わない。"
+  },
+  {
+    q: "The contract describes the terms of the agreement in great _____.",
+    opts: ["details", "detailed", "detail", "detailing"],
+    ans: 3,
+    exp: "in detail「詳細に」は単数形の定型句で、強調には in great detail とする。複数形 in details は非標準、detailed は形容詞、detailing は動名詞でいずれも前置詞句の核に合わない。"
+  },
+  {
+    q: "The CEO will _____ the merger at tomorrow's press conference.",
+    opts: ["announce", "declare on", "inform", "notify of"],
+    ans: 1,
+    exp: "announce は「発表する」で他動詞。直接目的語 the merger をとる。declare on は誤用（declare は他動詞）、inform は inform + 人 + of/that、notify も notify + 人 + of/that の形で、いずれも人を目的語にする必要がある。"
+  },
+  {
+    q: "The technician will come tomorrow to _____ the broken copier.",
+    opts: ["recover", "restore", "renew", "repair"],
+    ans: 4,
+    exp: "repair は「（壊れたものを）修理する」で、機械の故障対応に最も直接的。recover は「回復する、取り戻す」、restore は「元の状態に戻す、復元する」（建物・美術品等）、renew は「更新する」（契約等）で、機器修理の標準語ではない。"
+  },
+  {
+    q: "Due to high demand, the factory plans to _____ production by 20% next quarter.",
+    opts: ["rise", "grow up", "increase", "get up"],
+    ans: 3,
+    exp: "increase は「増やす」で他動詞として production を直接目的語にとれる。rise は自動詞で「上がる」（目的語不可）、grow up は「人が成長する」、get up は「起きる」で意味・用法ともに不適。"
+  },
+  {
+    q: "The package tour _____ airfare, accommodation, and daily meals.",
+    opts: ["includes", "contains", "holds", "involves"],
+    ans: 1,
+    exp: "include は「（リストの項目として）含む」で、パッケージの構成要素を列挙する際の定型。contain は「（容器の中に物理的に）含む」、hold は「保持する」、involve は「関与させる、伴う」で文脈に合わない。"
+  },
+  {
+    q: "The marketing team is _____ working on a new advertising campaign.",
+    opts: ["lately", "currently", "nowadays", "recently"],
+    ans: 2,
+    exp: "currently は「現在」で進行形と自然に共起する。lately は現在完了と、recently は過去形・現在完了と共起。nowadays は「今日では」で文頭・文末が普通で、進行形の間には通常入らない。"
+  },
+  {
+    q: "The company has increased its _____ budget by 30% this year.",
+    opts: ["advertise", "advertised", "advertisement", "advertising"],
+    ans: 4,
+    exp: "advertising は「広告活動（全般）」で、advertising budget は「広告予算」の定型。advertisement は「個別の広告」で budget の修飾には不自然。advertise は動詞、advertised は過去分詞。"
+  },
+  {
+    q: "Ms. Tanaka is in _____ of the new product development team.",
+    opts: ["lead", "head", "charge", "control"],
+    ans: 3,
+    exp: "in charge of ～「～を担当して、～の責任者で」の定型句。in lead of / in head of は誤用。in control of は「～を支配下に置いて」でニュアンスが強すぎる。"
+  },
+  {
+    q: "We _____ the shipment to arrive by Friday at the latest.",
+    opts: ["expect", "hope", "wish", "wait"],
+    ans: 1,
+    exp: "expect は expect + O + to do の構文をとれる（S が O に～することを期待する）。hope はこの構文をとれず、hope that / hope to do の形のみ。wish + O + to do は古風で一般的でない。wait は wait for が必要。"
+  },
+  {
+    q: "She works for a prestigious law _____ in downtown Tokyo.",
+    opts: ["office", "firm", "agency", "bureau"],
+    ans: 2,
+    exp: "law firm は「法律事務所」の定型。専門職の事務所を指す際 firm が最も標準的。law office は個人事務所を指す場合があり定型表現としては firm が優先。agency（代理店）、bureau（政府機関）は法律事務所には使わない。"
+  },
+  {
+    q: "Our company has acquired several new _____ in the financial sector this year.",
+    opts: ["customers", "guests", "audiences", "clients"],
+    ans: 4,
+    exp: "clients は専門サービス（金融・法律・コンサル等）の顧客を指す。customers は小売・物品購入の顧客、guests はホテル等のゲスト、audiences は「聴衆」で金融業界の顧客には不適。"
+  },
+  {
+    q: "The CFO presented the quarterly _____ report to the board of directors.",
+    opts: ["financial", "finance", "financially", "financed"],
+    ans: 1,
+    exp: "financial report「財務報告書」は形容詞 financial が名詞 report を修飾する定型。finance は名詞で、finance report は標準的でない（複合名詞として限定的）。financially は副詞、financed は過去分詞で名詞修飾には不自然。"
+  },
+  {
+    q: "The company's _____ revenue reached a record high last fiscal year.",
+    opts: ["year", "monthly", "annual", "yearlong"],
+    ans: 3,
+    exp: "annual revenue は「年間収益」の定型。annual は「年次の、1年ごとの」。year は名詞で形容詞的には使わない。monthly（月次の）は fiscal year（会計年度）の文脈と合わない。yearlong は「1年間続く」で継続性を強調し、会計報告の「年次」の意味にはならない。"
+  },
+  {
+    q: "We request that _____ be made within 30 days of the invoice date.",
+    opts: ["paying", "payment", "pay", "paid"],
+    ans: 2,
+    exp: "request that + S + 原形（仮定法現在）の構文。be made の主語として名詞の payment が入る。paying は動名詞で主語化は可能だが be made と呼応が不自然、pay は動詞原形、paid は過去分詞で主語にならない。"
+  },
+  {
+    q: "The project exceeded its initial _____ by over $50,000.",
+    opts: ["cost", "expense", "fund", "budget"],
+    ans: 4,
+    exp: "exceed the budget「予算を超える」の定型。cost は「費用（実際に発生した額）」、expense は「経費」、fund は「資金」で、計画段階で設定された「予算」を超過する意味には budget が最適。"
+  },
+  {
+    q: "Please complete the job _____ form and return it to the HR department.",
+    opts: ["application", "applying", "applicant", "applied"],
+    ans: 1,
+    exp: "application form「申請書」、特に job application form「求職申込書」は定型。applying は動名詞、applicant は「応募者（人）」、applied は過去分詞で、いずれも form を修飾する名詞の位置に合わない。"
+  },
+  {
+    q: "Employees must follow the terms of their employment _____.",
+    opts: ["promising", "agreeing", "contract", "writing"],
+    ans: 3,
+    exp: "employment contract「雇用契約（書）」の定型。terms of the contract（契約条項）とも結びつく。promising/agreeing は動名詞、writing は「文書」だが契約書の定型語ではない。"
+  },
+  {
+    q: "The company's new _____ team has implemented several policy changes.",
+    opts: ["manage", "management", "manager", "managing"],
+    ans: 2,
+    exp: "management team「経営陣、管理チーム」の定型。management は「経営・管理（活動、部門）」を表す名詞。manage は動詞、manager は個人、managing は動名詞・現在分詞で team の修飾語として不自然。"
+  },
+  {
+    q: "The CEO praised the sales team's excellent _____ this quarter.",
+    opts: ["perform", "performing", "performer", "performance"],
+    ans: 4,
+    exp: "performance は「業績、パフォーマンス」。excellent performance の形で名詞を修飾される。perform は動詞、performing は動名詞、performer は「演者・従事者（人）」で、業績の意味にならない。"
+  },
+  {
+    q: "The manager was very _____ the results of the employee satisfaction survey.",
+    opts: ["pleased for", "pleased in", "pleased with", "pleased of"],
+    ans: 3,
+    exp: "be pleased with「～に満足して」の定型。前置詞 with が必要。pleased for は「（他人のために）嬉しい」で人を目的語に、pleased in / pleased of は非標準の前置詞誤用。"
+  },
+  {
+    q: "I am writing to _____ your reservation for April 20th.",
+    opts: ["assure", "ensure", "insure", "confirm"],
+    ans: 4,
+    exp: "confirm は「（事実・予約等を）確認する」で、予約確認の標準語。assure は「（人を）安心させる」（assure + 人）、ensure は「（事態を）確実にする」、insure は「保険をかける」で、混同されやすい四語の典型的な頻出誤答パターン。"
+  },
+  {
+    q: "Ms. Johnson received a prestigious _____ for her contributions to the company.",
+    opts: ["award", "reward", "bonus", "tip"],
+    ans: 1,
+    exp: "award は公式な賞（表彰）。会社への貢献に対する公式表彰の意味で適切。reward は「（行動への）報酬、ご褒美」、bonus は金銭的ボーナス、tip は「チップ」で、prestigious（名誉ある）と結びつかない。"
+  },
+  {
+    q: "Winter _____ is on sale starting next Monday.",
+    opts: ["clothes", "clothing", "cloths", "clothe"],
+    ans: 2,
+    exp: "clothing は「衣類」の不可算名詞で、is on sale（単数扱いの動詞）と呼応する。clothes は複数形で are on sale となるはず。cloths は「布切れ」の複数、clothe は動詞で文法的に合わない。"
+  },
+  {
+    q: "The restaurant was fully booked, but we tried to get a table _____.",
+    opts: ["otherwise", "anyway", "moreover", "similarly"],
+    ans: 2,
+    exp: "anyway「とにかく、それでも」が逆接の文末で「予約が埋まっていたが、それでも席を確保しようとした」の意味を作る。otherwise は「さもないと、それ以外で」、moreover は「さらに」、similarly は「同様に」で逆接・譲歩を表さない。"
+  },
+  {
+    q: "Please read the _____ instructions carefully before operating the machine.",
+    opts: ["follow", "followed", "following", "follows"],
+    ans: 3,
+    exp: "following は「次の、以下の」の形容詞用法で instructions を修飾。the following instructions（以下の指示）は定型。follow（原形）、followed（過去分詞）、follows（三単現）は形容詞位置に来ない。"
+  },
+  {
+    q: "The sales manager _____ the annual report during the presentation.",
+    opts: ["mentioned about", "talked with", "pointed at", "referred to"],
+    ans: 4,
+    exp: "refer to は「（資料・事項に）言及する、参照する」。プレゼン中の報告書への抽象的言及に自然。mention は他動詞で about 不要（mentioned about は誤用）。talk with は「人と話す」で人目的語が必要、point at は「物理的に指差す」で報告書への言及には不適。"
+  },
+  {
+    q: "The position is still _____ for qualified candidates.",
+    opts: ["available", "possible", "capable", "ready"],
+    ans: 1,
+    exp: "available は「（求人・機会等が）利用可能な、空いている」。ポジションが応募可能な状態を表す標準表現。possible は「起こりうる」、capable は「能力がある」（人・物）、ready は「準備ができた」で、求人の空き状態には不適。"
+  },
+  {
+    q: "The accounting _____ is responsible for preparing the quarterly reports.",
+    opts: ["bureau", "department", "committee", "section"],
+    ans: 2,
+    exp: "accounting department「経理部」は企業内部署の標準表現。bureau は「（政府の）局、事務局」で民間企業には通常使わない、committee は特定目的の合議体、section は「区分、節」で部門名としては department より弱い。"
+  },
+  {
+    q: "The CEO will hold a press _____ to address the recent merger.",
+    opts: ["conference", "meeting", "gathering", "assembly"],
+    ans: 1,
+    exp: "press conference は「記者会見」の定型。meeting（会議一般）、gathering（集まり）、assembly（議会・集会）はいずれも press と組み合わせて「記者会見」の意味にならない。"
+  },
+  {
+    q: "_____ the schedule, the shipment should arrive on Wednesday.",
+    opts: ["Based with", "Depending on", "In case of", "According to"],
+    ans: 4,
+    exp: "According to ～「～によれば」は情報源・基準を示す定型句。Based with は誤用（正しくは based on）、Depending on は「～次第で」で条件を表す、In case of は「～の場合に備えて」で文脈に合わない。"
+  },
+  {
+    q: "Without proper training, accidents are _____ to occur in the workplace.",
+    opts: ["likely", "possible", "available", "probable"],
+    ans: 1,
+    exp: "be likely to do「～しそうである」の構文。likely は形容詞 + to不定詞の形を自然にとる。possible と probable は通常 It is ～ that ～ の形で使い、be ～ to do の構文では不自然。available は意味不適。"
+  },
+  {
+    q: "The company _____ a generous severance package to employees affected by the layoffs.",
+    opts: ["offered", "provided with", "gave of", "supplied for"],
+    ans: 1,
+    exp: "offer O to O'「O' に O を提供する」の構文。退職パッケージの提供を表す標準表現。provided with は「～を備えた」で受動的・異なる構文、gave of と supplied for は前置詞の誤用。"
+  },
+  {
+    q: "The laboratory is equipped with state-of-the-art _____.",
+    opts: ["equipments", "equipping", "equip", "equipment"],
+    ans: 4,
+    exp: "equipment は不可算名詞。state-of-the-art equipment（最新鋭の設備）は定型。equipments は誤り（複数形不可）、equipping は動名詞、equip は動詞で、with の目的語としての名詞には合わない。"
+  },
+  {
+    q: "The website _____ detailed information about our services.",
+    opts: ["provides", "informs", "tells", "notices"],
+    ans: 1,
+    exp: "provide は「（情報・物）を提供する」で、直接目的語に情報・物をとれる。inform と tell は人目的語が必要（inform + 人 + of, tell + 人 + that）、notice は「気づく」で主語が無生物の website には不適。"
+  },
+  {
+    q: "The project is subject to approval by the _____ government.",
+    opts: ["native", "inside", "local", "personal"],
+    ans: 3,
+    exp: "local government は「地方自治体、地方政府」の定型。native は「原産の、生まれつきの」、inside は「内側の」、personal は「個人の」で、政府レベルを表す語として不適。"
+  },
+  {
+    q: "Our company _____ office supplies from a wholesale distributor.",
+    opts: ["buys of", "shops at", "purchases", "orders for"],
+    ans: 3,
+    exp: "purchase は「購入する」で他動詞、直接目的語をとる。buys of は非標準、shops at は場所を目的語にとる（shop at the store）、orders for は for 不要（order は他動詞）で、office supplies を直接目的語に取れるのは purchase。"
+  },
+  {
+    q: "There is a job _____ in the marketing department.",
+    opts: ["open", "opens", "opened", "opening"],
+    ans: 4,
+    exp: "opening は名詞で「（職の）空き、欠員」。job opening は「求人」の定型。open は形容詞または動詞、opens は三単現、opened は過去分詞で、a job の後の名詞位置には opening が適合。"
+  },
+  {
+    q: "The highway is temporarily closed due to road _____.",
+    opts: ["constructing", "construct", "construction", "constructive"],
+    ans: 3,
+    exp: "road construction は「道路工事」の定型。construction は名詞。constructing は動名詞、construct は動詞、constructive は形容詞で、いずれも road の後の名詞位置に合わない。"
+  },
+  {
+    q: "The museum offers a guided _____ every weekend at 2 PM.",
+    opts: ["travel", "trip", "tour", "journey"],
+    ans: 3,
+    exp: "guided tour は「ガイド付き見学」の定型。travel は「旅行（不可算・抽象）」、trip は「短い旅行」、journey は「長旅・道のり」で、美術館等の案内付き見学の意味にはならない。"
+  },
+  {
+    q: "The company conducted extensive market _____ before launching the new product.",
+    opts: ["research", "researches", "researcher", "researched"],
+    ans: 1,
+    exp: "market research は「市場調査」の定型で、research は不可算名詞。researches は非標準、researcher は「研究者（人）」、researched は過去分詞で、market の後の名詞位置には research のみが合う。"
+  },
+  {
+    q: "More than 500 people are expected to _____ the industry seminar.",
+    opts: ["attend to", "attend", "participate", "join in"],
+    ans: 2,
+    exp: "attend は他動詞で「出席する」。直接目的語 the seminar をとる。attend to は「～の世話をする」で意味が異なる。participate は participate in、join in も in が必要で、前置詞なしで seminar を目的語にできない。"
+  },
+  {
+    q: "Express _____ is available for an additional fee.",
+    opts: ["deliver", "delivery", "delivering", "delivered"],
+    ans: 2,
+    exp: "express delivery は「速達配達」の定型。delivery は名詞。deliver は動詞、delivering と delivered は分詞・動名詞で、express の後の名詞位置には delivery のみが適合。"
+  },
+  {
+    q: "Ms. Tanaka _____ joined the sales team.",
+    opts: ["recent", "recency", "recentness", "recently"],
+    ans: 4,
+    exp: "動詞 joined を修飾するのは副詞。recently は「最近」の副詞で過去形と共起。recent は形容詞、recency / recentness は名詞で動詞修飾に使えない。"
+  },
+  {
+    q: "The warning light _____ that the machine needs maintenance.",
+    opts: ["informs", "discusses", "indicates", "believes"],
+    ans: 3,
+    exp: "indicate は「示す」で that 節を従え、無生物主語（警告灯）と自然に結びつく。inform は人目的語が必要（inform + 人 + that）、discuss は「議論する」で主語が警告灯では不自然、believe は人の信念を表す動詞で無生物主語と合わない。"
+  },
+  {
+    q: "The restaurant is looking to hire a new _____ for the weekend shift.",
+    opts: ["employer", "employment", "employing", "employee"],
+    ans: 4,
+    exp: "employee は「従業員」。hire a new employee は定型。employer は「雇用主（反対側）」、employment は「雇用（制度）」、employing は動名詞・現在分詞で、採用対象を表す名詞として不適。"
+  },
+  {
+    q: "Please contact us if you require _____ assistance.",
+    opts: ["addition", "additional", "adding", "additionally"],
+    ans: 2,
+    exp: "additional は形容詞「追加の」で名詞 assistance を修飾。addition は名詞、adding は動名詞、additionally は副詞で、名詞修飾には形容詞の additional が必要。"
+  },
+  {
+    q: "A _____ of commuters revealed that most prefer public transportation.",
+    opts: ["review", "inspection", "check", "survey"],
+    ans: 4,
+    exp: "survey は「意識調査、アンケート」。a survey of ～（～の調査）は意見調査の定型。review は「再検討、批評」、inspection は「検査（設備・書類等）」、check は「確認」で、人々の意見調査の意味にならない。"
+  },
+  {
+    q: "Could you please _____ the document before the meeting tomorrow?",
+    opts: ["see", "review", "watch", "notice"],
+    ans: 2,
+    exp: "review は「（書類・資料を）目を通す、検討する」。会議前の資料事前確認の標準表現。see は「見る（一般）」、watch は「（動くものを）見る」、notice は「気づく」で、書類を検討する意味にならない。"
+  },
+  {
+    q: "The _____ line was temporarily halted due to a technical issue.",
+    opts: ["producing", "product", "production", "produced"],
+    ans: 3,
+    exp: "production line は「生産ライン」の定型。production は名詞。product line は「製品ラインナップ」で意味が異なり、技術的問題で停止する文脈には production line が適切。producing / produced は分詞で name のような複合名詞を作らない。"
+  },
+  {
+    q: "Our headquarters _____ in the heart of the financial district.",
+    opts: ["locates", "is located", "locating", "is locating"],
+    ans: 2,
+    exp: "be located「位置する」は受動態の形で所在を表す定型。locate は他動詞で「～を置く」、能動で使うなら We locate our headquarters in ～ となる。locating は現在分詞、is locating は進行形で状態動詞的用法には不自然。"
+  },
+  {
+    q: "The report explains the new policy in considerable _____.",
+    opts: ["details", "detailed", "detail", "detailing"],
+    ans: 3,
+    exp: "in detail「詳細に」は単数形で固定された慣用句。強調には in considerable/great detail。複数形 in details は非標準、detailed は形容詞、detailing は動名詞でこの慣用句に合わない。"
+  },
+  {
+    q: "The winners of the competition will be _____ at the ceremony.",
+    opts: ["announced", "declared on", "informed", "notified of"],
+    ans: 1,
+    exp: "announce は「発表する」で他動詞、受動態 be announced で「発表される」。declared on は誤用、informed と notified は人目的語を取る動詞で、受動態でも winners（物事的）ではなく人が主語になる場合が多い。"
+  },
+  {
+    q: "The bridge is currently under _____ and will reopen next month.",
+    opts: ["recovery", "restoration", "renewal", "repair"],
+    ans: 4,
+    exp: "under repair「修理中」は橋・機械等の修理状態を表す定型句。recovery は「回復」、restoration は「復元（建物・美術品等）」、renewal は「更新（契約・会員等）」で、橋の通行止め時の一般的表現にはならない。"
+  },
+  {
+    q: "There has been a significant _____ in demand for eco-friendly products.",
+    opts: ["rise up", "raising", "increase", "growing up"],
+    ans: 3,
+    exp: "increase は名詞「増加」。an increase in ～（～の増加）は定型。rise up は動詞句（立ち上がる）、raising は動名詞（raise の）、growing up は「成長する」（人）で、名詞として主語位置に入れない。"
+  },
+  {
+    q: "The total price _____ tax and shipping charges.",
+    opts: ["includes", "contains", "holds", "involves"],
+    ans: 1,
+    exp: "include は「（構成要素として）含む」。価格・リストが項目を含むことを表す標準語。contain は「物理的に中に入っている」、hold は「保持する」、involve は「関与・伴う」で、税・送料を含む意味には不適。"
+  },
+  {
+    q: "The item you ordered is _____ out of stock.",
+    opts: ["lately", "currently", "recently", "nowadays"],
+    ans: 2,
+    exp: "currently は「現在」で現在の状態を修飾する副詞として最適。lately は現在完了と、recently は過去形・現在完了と共起するのが一般的。nowadays は「今日では」で一般的傾向を示し、在庫状況のような個別具体の現状には不自然。"
+  },
+  {
+    q: "She works at a major _____ agency on Madison Avenue.",
+    opts: ["advertise", "advertised", "advertising", "advertisement"],
+    ans: 3,
+    exp: "advertising agency は「広告代理店」の定型。advertising は名詞・形容詞的用法で agency を修飾。advertise は動詞、advertised は過去分詞、advertisement は「個別の広告」で、業種を示す複合名詞には合わない。"
+  },
+  {
+    q: "Customers can return defective products free of _____.",
+    opts: ["charge", "cost", "price", "fee"],
+    ans: 1,
+    exp: "free of charge「無料で」は固定された慣用句。free of cost/price/fee は非標準で使わない。TOEIC頻出の定型表現。"
+  },
+  {
+    q: "All staff are _____ to attend the monthly safety meeting.",
+    opts: ["hoped", "wished", "waited", "expected"],
+    ans: 4,
+    exp: "be expected to do「～することを期待される・求められる」の定型（受動態）。hope と wish は受動態でこの構文を取らない、wait は wait for の形で人を主語にした受動態は非標準。"
+  },
+  {
+    q: "The consulting _____ has offices in over 30 countries worldwide.",
+    opts: ["office", "firm", "agency", "bureau"],
+    ans: 2,
+    exp: "consulting firm は「コンサルティング会社」の定型。firm は法律・会計・コンサル等専門サービス会社を指す標準語。office は「事務所（単位）」、agency は「代理店」、bureau は「政府の局」で、コンサル業の会社全体を指す語として不適。"
+  },
+  {
+    q: "The lawyer met with her _____ to discuss the upcoming trial.",
+    opts: ["customer", "guest", "audience", "client"],
+    ans: 4,
+    exp: "client は弁護士・医師・会計士等、専門職サービスの依頼人を指す。customer は小売の顧客、guest はホテル等のゲスト、audience は「聴衆」で、弁護士の依頼人の意味にはならない。"
+  },
+  {
+    q: "She is seeking _____ advice before purchasing the property.",
+    opts: ["financial", "finance", "financially", "financed"],
+    ans: 1,
+    exp: "financial advice は「財務アドバイス」の定型で、形容詞 financial が名詞 advice を修飾。finance は名詞（finance advice は非標準）、financially は副詞、financed は過去分詞で、名詞修飾の位置に合わない。"
+  },
+  {
+    q: "All employees are entitled to 15 days of _____ leave.",
+    opts: ["year", "monthly", "annual", "yearlong"],
+    ans: 3,
+    exp: "annual leave は「年次休暇」の定型（英国英語的だが国際ビジネスで一般）。15日という数字とも整合。year は名詞で形容詞的修飾に使わない、monthly は「月次」で15日と意味が合わない、yearlong は「1年間続く」で休暇制度の性質を表さない。"
+  },
+  {
+    q: "We accept _____ by credit card, debit card, or bank transfer.",
+    opts: ["paying", "payment", "pay", "paid"],
+    ans: 2,
+    exp: "payment は名詞「支払い」で、accept の目的語。accept payment by ～ は支払い手段を列挙する定型。paying は動名詞で不自然、pay は動詞、paid は過去分詞で目的語の位置に合わない。"
+  },
+  {
+    q: "The project was completed under _____ and ahead of schedule.",
+    opts: ["price", "cost", "expense", "budget"],
+    ans: 4,
+    exp: "under budget は「予算内で、予算を下回って」の固定表現。ahead of schedule（予定より早く）と並列。under price/cost/expense は標準的な慣用句ではない。TOEIC頻出。"
+  },
+  {
+    q: "Please fill out the loan _____ form and submit it to the bank.",
+    opts: ["application", "applying", "applicant", "apply"],
+    ans: 1,
+    exp: "loan application form は「ローン申込書」の定型。application は名詞「申請（書）」で form を修飾する複合名詞を作る。applying は動名詞、applicant は「応募者（人）」、apply は動詞で、form 修飾の位置に合わない。"
+  },
+  {
+    q: "Both parties must sign the _____ before the deal can proceed.",
+    opts: ["promising", "agreeing", "contract", "writing"],
+    ans: 3,
+    exp: "contract は「契約書」。sign the contract は取引合意の標準行為。promising / agreeing は動名詞で名詞として契約書を指さない、writing は一般的な「文書」で法的拘束力を持つ契約書の定型語ではない。"
+  },
+  {
+    q: "Effective time _____ is essential for meeting project deadlines.",
+    opts: ["manage", "management", "manager", "managing"],
+    ans: 2,
+    exp: "time management は「時間管理」の定型。management は名詞「管理（活動）」。manage は動詞、manager は人、managing は動名詞で、time との複合名詞としては management が標準。"
+  },
+  {
+    q: "The company's overall _____ exceeded expectations this year.",
+    opts: ["perform", "performing", "performer", "performance"],
+    ans: 4,
+    exp: "performance は「業績、成績」。overall performance は「全体的な業績」の定型。perform は動詞、performing は動名詞、performer は「演者・従事者（人）」で、業績を表す名詞位置には performance が適切。"
+  },
+  {
+    q: "The client was highly _____ the quality of our customer service.",
+    opts: ["pleased for", "pleased in", "pleased with", "pleased of"],
+    ans: 3,
+    exp: "be pleased with「～に満足して」の定型。前置詞は with。pleased for は「（他人のために）嬉しい」で通常人が目的語、pleased in / pleased of は非標準。"
+  },
+  {
+    q: "Could you please _____ your attendance at the meeting by Friday?",
+    opts: ["assure", "ensure", "insure", "confirm"],
+    ans: 4,
+    exp: "confirm「（出席・予約等を）確認する」が適切。assure は人を目的語に取り「安心させる」、ensure は「～を確実にする」で事態が目的語、insure は「保険をかける」。四語の混同は TOEIC 最頻出パターン。"
+  },
+  {
+    q: "The film won numerous _____ at international festivals.",
+    opts: ["awards", "rewards", "bonuses", "tips"],
+    ans: 1,
+    exp: "award は「（公式な）賞」で、映画祭の受賞の標準語。reward は「行動・功績への報酬」、bonus は金銭的ボーナス、tip は「チップ」で、映画祭の受賞を表さない。"
+  },
+  {
+    q: "Formal _____ is required for all employees during client meetings.",
+    opts: ["clothes", "clothing", "cloths", "clothe"],
+    ans: 2,
+    exp: "clothing は不可算名詞で is と呼応する単数扱い。formal clothing は「フォーマルな服装」の定型。clothes は複数形で動詞は are、cloths は「布切れ」の複数、clothe は動詞で不適。"
+  },
+];
+QUESTIONS.push(...QUESTIONS_DATA);
+
+// =============================================================================
+// QUIZ LOGIC
+// =============================================================================
+(function() {
+  const STORAGE_KEY = 'toeic_quiz_progress_v1';
+  const TOTAL = 0; // will be set after data loaded
+  const app = document.getElementById('app');
+
+  let state = {
+    mode: 'start',      // 'start' | 'quiz' | 'result' | 'review'
+    index: 0,           // current question index
+    answers: [],        // array of {chosen: 1-4, correct: boolean} or null
+    answered: false,    // has user answered current question
+    reviewList: [],     // indices of wrong questions for review
+    reviewPos: 0,       // position in reviewList
+  };
+
+  function save() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        index: state.index,
+        answers: state.answers,
+      }));
+    } catch(e) {}
+  }
+
+  function load() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+      return JSON.parse(raw);
+    } catch(e) { return null; }
+  }
+
+  function clearSave() {
+    try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
+  }
+
+  function countAnswered() {
+    return state.answers.filter(a => a != null).length;
+  }
+
+  function countCorrect() {
+    return state.answers.filter(a => a && a.correct).length;
+  }
+
+  function countWrong() {
+    return state.answers.filter(a => a && !a.correct).length;
+  }
+
+  function render() {
+    if (state.mode === 'start') renderStart();
+    else if (state.mode === 'quiz') renderQuiz();
+    else if (state.mode === 'result') renderResult();
+    else if (state.mode === 'review') renderReview();
+    window.scrollTo({top:0, behavior:'instant'});
+  }
+
+  function renderHeader(showMeta) {
+    const answered = countAnswered();
+    const total = QUESTIONS.length;
+    const correct = countCorrect();
+    const percent = answered > 0 ? Math.round((correct / answered) * 100) : 0;
+    return `
+      <div class="header">
+        <div class="brand">TOEIC Vocab &amp; Grammar <span class="brand-sub">語彙・文法 100</span></div>
+        ${showMeta ? `<div class="meta">${answered}/${total} · ${percent}%</div>` : ''}
+      </div>
+    `;
+  }
+
+  function renderProgress() {
+    const answered = countAnswered();
+    const total = QUESTIONS.length;
+    const correct = countCorrect();
+    const wrong = countWrong();
+    const percent = (answered / total) * 100;
+    return `
+      <div class="progress-wrap">
+        <div class="progress-bar">
+          <div class="progress-fill" style="width:${percent}%"></div>
+        </div>
+        <div class="progress-stats">
+          <span>Q.${state.index + 1} <strong>/ ${total}</strong></span>
+          <span>正答 <strong>${correct}</strong> · 誤答 <strong>${wrong}</strong></span>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderStart() {
+    const saved = load();
+    const hasSaved = saved && saved.answers && saved.answers.some(a => a != null);
+    const answered = hasSaved ? saved.answers.filter(a => a != null).length : 0;
+    const correct = hasSaved ? saved.answers.filter(a => a && a.correct).length : 0;
+
+    app.innerHTML = `
+      ${renderHeader(false)}
+      <div class="start">
+        <div class="start-eyebrow">Practice Set · for Japanese Learners</div>
+        <h1 class="start-title">TOEIC 語彙・文法</h1>
+        <div class="start-title-en">100 Questions in Business Context</div>
+        <p class="start-desc">
+          Part 5 形式の短文穴埋め問題集。ビジネス頻出語彙とコロケーション、文法項目を網羅した100問。
+          1問ずつ即時に正誤判定と解説が表示され、スコアは自動で保存される。
+        </p>
+
+        <div class="start-specs">
+          <div class="spec">
+            <div class="spec-label">Questions</div>
+            <div class="spec-value">100</div>
+          </div>
+          <div class="spec">
+            <div class="spec-label">Format</div>
+            <div class="spec-value">4 Choice</div>
+          </div>
+          <div class="spec">
+            <div class="spec-label">Focus</div>
+            <div class="spec-value">Part 5</div>
+          </div>
+        </div>
+
+        ${hasSaved ? `
+          <div class="resume-note">
+            前回の記録：<strong>${answered}/${QUESTIONS.length}問</strong> 回答済み・正答 <strong>${correct}</strong>問
+          </div>
+        ` : ''}
+
+        <div class="btn-row">
+          ${hasSaved ? `
+            <button class="btn" data-action="resume">
+              続きから <span class="btn-arrow">→</span>
+            </button>
+            <button class="btn btn-ghost" data-action="restart">最初から</button>
+          ` : `
+            <button class="btn" data-action="start">
+              開始する <span class="btn-arrow">→</span>
+            </button>
+          `}
+        </div>
+
+        <div class="footer">Ink on paper · offline-ready</div>
+      </div>
+    `;
+
+    app.querySelectorAll('[data-action]').forEach(el => {
+      el.addEventListener('click', () => {
+        const act = el.dataset.action;
+        if (act === 'start' || act === 'restart') {
+          state.answers = new Array(QUESTIONS.length).fill(null);
+          state.index = 0;
+          state.answered = false;
+          state.mode = 'quiz';
+          clearSave();
+          render();
+        } else if (act === 'resume') {
+          const s = load();
+          state.answers = s.answers && s.answers.length === QUESTIONS.length
+            ? s.answers
+            : new Array(QUESTIONS.length).fill(null);
+          state.index = typeof s.index === 'number' ? Math.min(s.index, QUESTIONS.length - 1) : 0;
+          state.answered = state.answers[state.index] != null;
+          state.mode = 'quiz';
+          render();
+        }
+      });
+    });
+  }
+
+  function renderQuiz() {
+    const q = QUESTIONS[state.index];
+    const existing = state.answers[state.index];
+    const answered = existing != null;
+    state.answered = answered;
+
+    app.innerHTML = `
+      ${renderHeader(true)}
+      ${renderProgress()}
+      <div class="question-num">Question ${state.index + 1}</div>
+      <div class="question">${escapeHtml(q.q)}</div>
+      <div class="options">
+        ${q.opts.map((opt, i) => {
+          const num = i + 1;
+          const letter = String.fromCharCode(65 + i);
+          let cls = 'option';
+          if (answered) {
+            cls += ' dimmed';
+            if (num === q.ans) cls = 'option correct';
+            else if (num === existing.chosen) cls = 'option wrong';
+          }
+          return `
+            <button class="${cls}" data-num="${num}" ${answered ? 'disabled' : ''}>
+              <span class="option-letter">(${letter})</span>
+              <span class="option-text">${escapeHtml(opt)}</span>
+            </button>
+          `;
+        }).join('')}
+      </div>
+      ${answered ? renderFeedback(q, existing) : ''}
+      <div class="nav">
+        <button class="nav-quit" data-action="quit">一時中断して最初に戻る</button>
+        ${answered ? `
+          <button class="btn" data-action="next">
+            ${state.index === QUESTIONS.length - 1 ? '結果を見る' : '次の問題'} <span class="btn-arrow">→</span>
+          </button>
+        ` : ''}
+      </div>
+    `;
+
+    app.querySelectorAll('.option:not([disabled])').forEach(el => {
+      el.addEventListener('click', () => {
+        const num = parseInt(el.dataset.num, 10);
+        const correct = num === q.ans;
+        state.answers[state.index] = { chosen: num, correct: correct };
+        state.answered = true;
+        save();
+        render();
+      });
+    });
+
+    app.querySelectorAll('[data-action]').forEach(el => {
+      el.addEventListener('click', () => {
+        const act = el.dataset.action;
+        if (act === 'next') {
+          if (state.index === QUESTIONS.length - 1) {
+            state.mode = 'result';
+          } else {
+            state.index++;
+            state.answered = state.answers[state.index] != null;
+          }
+          save();
+          render();
+        } else if (act === 'quit') {
+          state.mode = 'start';
+          render();
+        }
+      });
+    });
+  }
+
+  function renderFeedback(q, ans) {
+    const isCorrect = ans.correct;
+    const letter = String.fromCharCode(64 + q.ans);
+    return `
+      <div class="feedback ${isCorrect ? 'correct' : 'wrong'}">
+        <div class="feedback-verdict">
+          ${isCorrect ? 'Correct' : 'Incorrect'}
+          <span class="feedback-verdict-jp">${isCorrect ? '正解' : '不正解'} · 正答は (${letter}) <span class="feedback-correct-answer">${escapeHtml(q.opts[q.ans - 1])}</span></span>
+        </div>
+        <div class="feedback-body">${escapeHtml(q.exp)}</div>
+      </div>
+    `;
+  }
+
+  function renderResult() {
+    const answered = countAnswered();
+    const correct = countCorrect();
+    const wrong = answered - correct;
+    const percent = answered > 0 ? Math.round((correct / answered) * 100) : 0;
+
+    let msg = '';
+    if (percent >= 90) msg = 'Excellent — 9割超え。この水準を維持。';
+    else if (percent >= 75) msg = 'Strong — 安定した実力。誤答を見直して完璧に。';
+    else if (percent >= 60) msg = 'Solid — 基礎は固まっている。弱点を潰していこう。';
+    else if (percent >= 40) msg = 'Building — 復習モードで間違いを潰そう。';
+    else msg = 'Starting out — まずは解説を読み込んで、再挑戦を。';
+
+    const wrongIndices = state.answers
+      .map((a, i) => (a && !a.correct) ? i : -1)
+      .filter(i => i >= 0);
+
+    app.innerHTML = `
+      ${renderHeader(false)}
+      <div class="results">
+        <div class="results-eyebrow">Result</div>
+        <h1 class="results-title">お疲れさまでした。</h1>
+
+        <div class="score-display">
+          <div class="score-big">${percent}<sup>%</sup></div>
+          <div class="score-label">accuracy</div>
+        </div>
+
+        <div class="score-breakdown">
+          <div class="score-cell">
+            <div class="score-cell-label">Answered</div>
+            <div class="score-cell-value">${answered} / ${QUESTIONS.length}</div>
+          </div>
+          <div class="score-cell correct">
+            <div class="score-cell-label">Correct</div>
+            <div class="score-cell-value">${correct}</div>
+          </div>
+          <div class="score-cell wrong">
+            <div class="score-cell-label">Wrong</div>
+            <div class="score-cell-value">${wrong}</div>
+          </div>
+        </div>
+
+        <p class="results-msg">${msg}</p>
+
+        <div class="btn-row">
+          ${wrong > 0 ? `<button class="btn" data-action="review">間違いを復習 <span class="btn-arrow">→</span></button>` : ''}
+          <button class="btn btn-ghost" data-action="restart">最初から解き直す</button>
+        </div>
+
+        <div class="footer">${new Date().toLocaleDateString('ja-JP', {year:'numeric', month:'long', day:'numeric'})}</div>
+      </div>
+    `;
+
+    app.querySelectorAll('[data-action]').forEach(el => {
+      el.addEventListener('click', () => {
+        const act = el.dataset.action;
+        if (act === 'review') {
+          state.reviewList = wrongIndices;
+          state.reviewPos = 0;
+          state.mode = 'review';
+          render();
+        } else if (act === 'restart') {
+          state.answers = new Array(QUESTIONS.length).fill(null);
+          state.index = 0;
+          state.answered = false;
+          state.mode = 'quiz';
+          clearSave();
+          render();
+        }
+      });
+    });
+  }
+
+  function renderReview() {
+    if (state.reviewList.length === 0) {
+      state.mode = 'result';
+      render();
+      return;
+    }
+
+    const qIdx = state.reviewList[state.reviewPos];
+    const q = QUESTIONS[qIdx];
+    const existing = state.answers[qIdx];
+    const reviewTotal = state.reviewList.length;
+
+    app.innerHTML = `
+      ${renderHeader(false)}
+      <div class="review-header">
+        <div class="review-title">Review<span class="review-title-jp">間違えた問題の復習</span></div>
+        <div class="review-count">${state.reviewPos + 1} / ${reviewTotal}</div>
+      </div>
+      <div class="question-num">Question ${qIdx + 1}</div>
+      <div class="question">${escapeHtml(q.q)}</div>
+      <div class="options">
+        ${q.opts.map((opt, i) => {
+          const num = i + 1;
+          const letter = String.fromCharCode(65 + i);
+          let cls = 'option dimmed';
+          if (num === q.ans) cls = 'option correct';
+          else if (existing && num === existing.chosen) cls = 'option wrong';
+          return `
+            <button class="${cls}" disabled>
+              <span class="option-letter">(${letter})</span>
+              <span class="option-text">${escapeHtml(opt)}</span>
+            </button>
+          `;
+        }).join('')}
+      </div>
+      ${renderFeedback(q, existing || {chosen: 0, correct: false})}
+      <div class="nav">
+        <button class="nav-quit" data-action="result">結果に戻る</button>
+        <div style="display:flex;gap:10px;">
+          ${state.reviewPos > 0 ? `<button class="btn btn-ghost" data-action="prev">← 前</button>` : ''}
+          ${state.reviewPos < reviewTotal - 1 ? `<button class="btn" data-action="next">次 →</button>` : `<button class="btn" data-action="result">完了 →</button>`}
+        </div>
+      </div>
+    `;
+
+    app.querySelectorAll('[data-action]').forEach(el => {
+      el.addEventListener('click', () => {
+        const act = el.dataset.action;
+        if (act === 'next') { state.reviewPos++; render(); }
+        else if (act === 'prev') { state.reviewPos--; render(); }
+        else if (act === 'result') { state.mode = 'result'; render(); }
+      });
+    });
+  }
+
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;')
+      .replace(/'/g,'&#39;');
+  }
+
+  // Initialize on load
+  document.addEventListener('DOMContentLoaded', () => {
+    state.answers = new Array(QUESTIONS.length).fill(null);
+    render();
+  });
+
+  // also run immediately in case DOMContentLoaded already fired
+  if (document.readyState === 'loading') {
+    // wait
+  } else {
+    state.answers = new Array(QUESTIONS.length).fill(null);
+    render();
+  }
+})();
+</script>
+</body>
+</html>
