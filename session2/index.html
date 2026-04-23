@@ -1,0 +1,2080 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1c1916">
+<title>TOEIC用語彙 100問</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f5f1e8;
+    --paper-warm: #ebe5d6;
+    --ink: #1c1916;
+    --ink-soft: #3a3530;
+    --muted: #6b6456;
+    --rule: #d4cdba;
+    --rule-soft: #e3ddcc;
+    --accent: #8b2332;
+    --accent-soft: #a84658;
+    --correct: #2f5d2f;
+    --correct-soft: #d9e5d5;
+    --wrong: #8b2332;
+    --wrong-soft: #ead5d8;
+    --shadow: 0 1px 2px rgba(28,25,22,.04), 0 4px 16px rgba(28,25,22,.06);
+    --serif-en: 'Fraunces', 'Noto Serif JP', Georgia, serif;
+    --serif-jp: 'Noto Serif JP', 'Yu Mincho', serif;
+    --sans-jp: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Hiragino Sans', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans-jp);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+    min-height: 100vh;
+  }
+
+  body {
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(139,35,50,.03), transparent 40%),
+      radial-gradient(circle at 80% 90%, rgba(47,93,47,.03), transparent 40%);
+  }
+
+  .app {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 24px 20px 80px;
+    min-height: 100vh;
+  }
+
+  /* === HEADER === */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .brand {
+    font-family: var(--serif-en);
+    font-weight: 500;
+    font-style: italic;
+    font-size: 1.1rem;
+    letter-spacing: .02em;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .brand-session {
+    display: inline-block;
+    padding: 3px 10px 4px;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--serif-jp);
+    font-size: .78rem;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: .08em;
+    line-height: 1;
+    vertical-align: 2px;
+  }
+
+  .brand-main {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  .brand-sub {
+    font-family: var(--sans-jp);
+    font-size: .75rem;
+    color: var(--muted);
+    font-style: normal;
+    letter-spacing: .05em;
+  }
+
+  @media (max-width: 520px) {
+    .brand { font-size: .95rem; gap: 8px; }
+    .brand-session { font-size: .72rem; padding: 2px 8px 3px; }
+  }
+
+  .meta {
+    font-family: var(--serif-en);
+    font-size: .85rem;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* === PROGRESS BAR === */
+  .progress-wrap {
+    margin-bottom: 32px;
+  }
+
+  .progress-bar {
+    height: 3px;
+    background: var(--rule-soft);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--ink);
+    transition: width .4s cubic-bezier(.4,0,.2,1);
+  }
+
+  .progress-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-family: var(--serif-en);
+    font-size: .8rem;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .progress-stats strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* === START SCREEN === */
+  .start {
+    padding: 40px 0;
+    text-align: left;
+  }
+
+  .start-eyebrow {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--accent);
+    margin-bottom: 8px;
+    letter-spacing: .02em;
+  }
+
+  .start-title {
+    font-family: var(--serif-jp);
+    font-size: clamp(1.8rem, 5vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 4px;
+    letter-spacing: -.01em;
+  }
+
+  .start-title-en {
+    font-family: var(--serif-en);
+    font-size: clamp(1.3rem, 4vw, 1.8rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+    letter-spacing: -.01em;
+  }
+
+  .start-desc {
+    font-size: .95rem;
+    color: var(--ink-soft);
+    max-width: 540px;
+    margin-bottom: 32px;
+    line-height: 1.75;
+  }
+
+  .start-specs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin-bottom: 40px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .spec {
+    padding: 16px 14px;
+    border-right: 1px solid var(--rule);
+  }
+  .spec:last-child { border-right: none; }
+
+  .spec-label {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: .7rem;
+    color: var(--muted);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .spec-value {
+    font-family: var(--serif-en);
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    font-family: var(--sans-jp);
+    font-size: 1rem;
+    font-weight: 500;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    cursor: pointer;
+    letter-spacing: .02em;
+    transition: transform .15s, background .15s;
+  }
+
+  .btn:hover { background: var(--ink-soft); }
+  .btn:active { transform: translateY(1px); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+    padding: 13px 27px;
+  }
+  .btn-ghost:hover { background: var(--ink); color: var(--paper); }
+
+  .btn-arrow {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: 1.05rem;
+  }
+
+  .btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .resume-note {
+    background: var(--paper-warm);
+    padding: 14px 16px;
+    margin-bottom: 20px;
+    font-size: .85rem;
+    color: var(--ink-soft);
+    border-left: 3px solid var(--accent);
+    line-height: 1.7;
+  }
+
+  /* === NAME FORM === */
+  .name-form {
+    margin-bottom: 28px;
+    padding: 20px 22px;
+    background: rgba(255,255,255,.4);
+    border: 1px solid var(--rule);
+  }
+
+  .name-field {
+    margin-bottom: 14px;
+  }
+  .name-field:last-of-type { margin-bottom: 0; }
+
+  .name-label {
+    display: block;
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: .78rem;
+    color: var(--muted);
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .name-label .jp {
+    font-family: var(--sans-jp);
+    font-style: normal;
+    font-size: .72rem;
+    color: var(--ink-soft);
+    margin-left: 8px;
+    letter-spacing: .02em;
+    text-transform: none;
+  }
+
+  .name-input {
+    width: 100%;
+    padding: 11px 14px;
+    font-family: var(--sans-jp);
+    font-size: 1rem;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    color: var(--ink);
+    transition: border-color .15s, background .15s;
+    border-radius: 0;
+  }
+
+  .name-input:focus {
+    outline: none;
+    border-color: var(--ink);
+    background: #fff;
+  }
+
+  .name-error {
+    font-family: var(--sans-jp);
+    font-size: .82rem;
+    color: var(--wrong);
+    margin-top: 10px;
+    min-height: 1em;
+    font-weight: 500;
+  }
+
+  /* === STUDENT BANNER (Result Screen) === */
+  .student-banner {
+    padding: 16px 20px;
+    margin-bottom: 28px;
+    background: var(--ink);
+    color: var(--paper);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .student-name-jp {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: .7rem;
+    color: var(--paper);
+    opacity: .65;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    margin-right: 10px;
+  }
+
+  .student-name {
+    font-family: var(--serif-jp);
+    font-size: 1.2rem;
+    color: var(--paper);
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+
+  .student-id {
+    font-family: var(--serif-en);
+    font-size: .95rem;
+    color: var(--paper);
+    opacity: .75;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .student-datetime {
+    font-family: var(--serif-en);
+    font-size: .85rem;
+    color: var(--paper);
+    opacity: .7;
+    font-variant-numeric: tabular-nums;
+    font-style: italic;
+  }
+
+  @media (max-width: 520px) {
+    .student-banner {
+      padding: 14px 16px;
+      gap: 8px;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .student-name { font-size: 1.05rem; }
+    .student-datetime { font-size: .8rem; }
+  }
+
+  /* === SUBMIT NOTICE === */
+  .submit-notice {
+    padding: 16px 20px;
+    margin-bottom: 32px;
+    background: #fffaf0;
+    border: 2px solid var(--accent);
+    border-left-width: 6px;
+  }
+
+  .submit-notice-label {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: .72rem;
+    color: var(--accent);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .submit-notice-body {
+    font-family: var(--sans-jp);
+    font-size: .92rem;
+    color: var(--ink);
+    line-height: 1.75;
+  }
+
+  .submit-notice-body strong {
+    color: var(--ink);
+    font-weight: 700;
+    font-size: 1rem;
+  }
+
+  .submit-notice-caution {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--rule);
+    font-size: .82rem;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  .submit-notice-caution u {
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-underline-offset: 3px;
+    font-weight: 500;
+  }
+
+  @media (max-width: 520px) {
+    .submit-notice { padding: 14px 16px; }
+    .submit-notice-body { font-size: .88rem; }
+    .submit-notice-body strong { font-size: .95rem; }
+    .submit-notice-caution { font-size: .78rem; }
+  }
+
+  /* === QUIZ SCREEN === */
+  .question-num {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: .85rem;
+    color: var(--muted);
+    letter-spacing: .05em;
+    margin-bottom: 12px;
+  }
+
+  .question-num::before {
+    content: "—— ";
+    color: var(--rule);
+  }
+
+  .question {
+    font-family: var(--serif-en);
+    font-size: clamp(1.15rem, 3.5vw, 1.4rem);
+    line-height: 1.6;
+    margin-bottom: 28px;
+    color: var(--ink);
+    font-weight: 400;
+    letter-spacing: -.005em;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  .option {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 18px;
+    background: transparent;
+    border: 1px solid var(--rule);
+    text-align: left;
+    cursor: pointer;
+    font-family: var(--serif-en);
+    font-size: 1.02rem;
+    color: var(--ink);
+    transition: all .15s;
+    width: 100%;
+    line-height: 1.4;
+  }
+
+  .option:hover:not(:disabled) {
+    border-color: var(--ink);
+    background: var(--paper-warm);
+  }
+
+  .option:disabled { cursor: default; }
+
+  .option-letter {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-weight: 500;
+    color: var(--muted);
+    min-width: 20px;
+    flex-shrink: 0;
+  }
+
+  .option-text {
+    flex: 1;
+  }
+
+  .option.correct {
+    border-color: var(--correct);
+    background: var(--correct-soft);
+    color: var(--correct);
+  }
+  .option.correct .option-letter { color: var(--correct); }
+
+  .option.wrong {
+    border-color: var(--wrong);
+    background: var(--wrong-soft);
+    color: var(--wrong);
+  }
+  .option.wrong .option-letter { color: var(--wrong); }
+
+  .option.dimmed {
+    opacity: .55;
+  }
+
+  /* === FEEDBACK === */
+  .feedback {
+    margin-top: 8px;
+    padding: 20px 22px;
+    border-left: 3px solid var(--ink);
+    background: var(--paper-warm);
+    animation: slideIn .3s ease-out;
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .feedback.correct { border-left-color: var(--correct); }
+  .feedback.wrong { border-left-color: var(--wrong); }
+
+  .feedback-verdict {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+    letter-spacing: .02em;
+  }
+
+  .feedback.correct .feedback-verdict { color: var(--correct); }
+  .feedback.wrong .feedback-verdict { color: var(--wrong); }
+
+  .feedback-verdict-jp {
+    font-family: var(--sans-jp);
+    font-size: .75rem;
+    font-weight: 500;
+    font-style: normal;
+    color: var(--muted);
+    margin-left: 8px;
+    letter-spacing: .05em;
+  }
+
+  .feedback-body {
+    font-size: .92rem;
+    line-height: 1.75;
+    color: var(--ink-soft);
+  }
+
+  .feedback-sentence {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 14px;
+    margin-bottom: 14px;
+    background: rgba(47,93,47,.06);
+    border: 1px solid rgba(47,93,47,.15);
+    font-family: var(--serif-en);
+    font-size: .98rem;
+    line-height: 1.55;
+    color: var(--correct);
+  }
+
+  .feedback-sentence.wrong-sentence {
+    background: rgba(139,35,50,.04);
+    border-color: rgba(139,35,50,.12);
+    color: var(--ink-soft);
+  }
+
+  .feedback-sentence-text {
+    flex: 1;
+    font-style: italic;
+  }
+
+  .accent-btns {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+    align-items: center;
+  }
+
+  .accent-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 10px;
+    background: var(--correct);
+    color: var(--paper);
+    border: none;
+    cursor: pointer;
+    font-size: .72rem;
+    font-family: var(--sans-jp);
+    font-weight: 500;
+    letter-spacing: .03em;
+    transition: transform .12s, opacity .12s;
+    white-space: nowrap;
+  }
+
+  .accent-btn:hover { opacity: .85; }
+  .accent-btn:active { transform: scale(.93); }
+
+  .accent-label {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: .7rem;
+  }
+
+  .wrong-sentence .accent-btn {
+    background: var(--muted);
+  }
+
+  @media (max-width: 520px) {
+    .feedback-sentence { font-size: .9rem; padding: 8px 12px; flex-wrap: wrap; }
+    .accent-btns { margin-top: 6px; }
+    .accent-btn { padding: 4px 8px; font-size: .68rem; }
+  }
+
+  .feedback-correct-answer {
+    font-family: var(--serif-en);
+    color: var(--ink);
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  /* === NAV === */
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 28px;
+    gap: 12px;
+  }
+
+  .nav-quit {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: .85rem;
+    color: var(--muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px 4px;
+    text-decoration: underline;
+    text-decoration-color: var(--rule);
+    text-underline-offset: 4px;
+  }
+  .nav-quit:hover { color: var(--ink); }
+
+  /* === RESULTS === */
+  .results {
+    padding: 20px 0;
+  }
+
+  .results-eyebrow {
+    font-family: var(--serif-en);
+    font-style: italic;
+    color: var(--accent);
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+
+  .results-title {
+    font-family: var(--serif-jp);
+    font-size: clamp(1.8rem, 5vw, 2.4rem);
+    font-weight: 700;
+    margin-bottom: 32px;
+    line-height: 1.25;
+  }
+
+  .score-display {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+
+  .score-big {
+    font-family: var(--serif-en);
+    font-size: clamp(4rem, 14vw, 6rem);
+    font-weight: 300;
+    line-height: 1;
+    color: var(--ink);
+    letter-spacing: -.02em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .score-big sup {
+    font-size: .4em;
+    font-style: italic;
+    color: var(--muted);
+    font-weight: 400;
+    margin-left: 4px;
+  }
+
+  .score-label {
+    font-family: var(--serif-en);
+    font-style: italic;
+    color: var(--muted);
+    font-size: 1rem;
+  }
+
+  .score-breakdown {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin: 32px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .score-cell {
+    padding: 16px 12px;
+    border-right: 1px solid var(--rule);
+  }
+  .score-cell:last-child { border-right: none; }
+
+  .score-cell-label {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: .7rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: 4px;
+  }
+
+  .score-cell-value {
+    font-family: var(--serif-en);
+    font-size: 1.4rem;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .score-cell.correct .score-cell-value { color: var(--correct); }
+  .score-cell.wrong .score-cell-value { color: var(--wrong); }
+
+  .results-msg {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+
+  /* === REVIEW LIST === */
+  .review-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .review-title {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--ink);
+  }
+
+  .review-title-jp {
+    font-family: var(--sans-jp);
+    font-size: .8rem;
+    color: var(--muted);
+    margin-left: 8px;
+    letter-spacing: .05em;
+  }
+
+  .review-count {
+    font-family: var(--serif-en);
+    font-size: .85rem;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* === UTILITIES === */
+  .hidden { display: none !important; }
+
+  .footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: .75rem;
+    color: var(--muted);
+    letter-spacing: .03em;
+  }
+
+  /* Mobile tweaks */
+  @media (max-width: 520px) {
+    .app { padding: 20px 16px 60px; }
+    .start-specs, .score-breakdown {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .spec, .score-cell { padding: 12px 8px; }
+    .spec-value, .score-cell-value { font-size: 1.15rem; }
+    .question { font-size: 1.1rem; }
+    .option { font-size: .98rem; padding: 12px 14px; }
+    .btn { padding: 12px 22px; font-size: .95rem; }
+  }
+
+  /* Print-like paper texture subtle */
+  .app::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle at 1px 1px, rgba(28,25,22,.015) 1px, transparent 0);
+    background-size: 3px 3px;
+    z-index: 0;
+  }
+  .app > * { position: relative; z-index: 1; }
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
+
+<script>
+// =============================================================================
+// QUESTION DATA
+// =============================================================================
+const QUESTIONS = [];
+const QUESTIONS_DATA = [
+  {
+    q: "The new smartphone model is currently on _____ at all major electronics stores.",
+    opts: ["vacation", "display", "delay", "strike"],
+    ans: 2,
+    exp: "on display は「展示されて」の定型句。vacation は「休暇」、delay は「遅延」、strike は「ストライキ」で意味が合わない。◆ currently = 現在 / major = 主要な / electronics stores = 家電量販店"
+  },
+  {
+    q: "All _____ for the manager position must have at least five years of experience.",
+    opts: ["volunteers", "employees", "candidates", "supervisors"],
+    ans: 3,
+    exp: "candidate は「候補者」で求人に応募し選考対象となった人。volunteer は「ボランティア（無報酬）」、employee は「すでに雇われている社員」、supervisor は「上司、監督者」で意味が異なる。◆ at least = 少なくとも / five years of experience = 5年の経験"
+  },
+  {
+    q: "The contract clearly _____ that all payments must be made within 30 days.",
+    opts: ["states", "speaks", "tells", "talks"],
+    ans: 1,
+    exp: "state は「明記する」で文書が主語のとき最も自然。speak/talk は人が主語の自動詞。tell は人目的語が必要。◆ contract = 契約書 / within 30 days = 30日以内に"
+  },
+  {
+    q: "Visitors are not allowed to touch any of the _____ in the gallery.",
+    opts: ["exhibitions", "displays", "features", "exhibits"],
+    ans: 4,
+    exp: "exhibit は名詞「展示品」。exhibition は「展覧会」全体、display は「陳列」で個別の展示品としては弱い、feature は「特徴」。◆ are not allowed to = ～を許可されていない / gallery = 展示室"
+  },
+  {
+    q: "The training _____ will begin at 9:00 AM and end at noon.",
+    opts: ["period", "session", "class", "term"],
+    ans: 2,
+    exp: "training session は「研修セッション」の定型。period は「期間」で1回の研修を指さない。class は「授業」で企業研修には不向き。term は「学期」で意味が異なる。◆ at noon = 正午に"
+  },
+  {
+    q: "Please _____ that the office will be closed during the holiday period.",
+    opts: ["note", "notice", "notify", "remark"],
+    ans: 1,
+    exp: "Please note that ～ は「～にご留意ください」の通知文定型。notice は「気づく」、notify は人目的語が必要、remark は「述べる」で依頼表現に不自然。◆ holiday period = 休暇期間"
+  },
+  {
+    q: "The application _____ usually takes about two weeks to complete.",
+    opts: ["progress", "procedure", "process", "practice"],
+    ans: 3,
+    exp: "application process は「申請手続き」の定型。progress は「進捗」、procedure は「手順（一連のステップ）」で申請全体の流れを指す語としては process が定型。practice は「慣行」で意味が異なる。◆ takes about two weeks = 約2週間かかる"
+  },
+  {
+    q: "Please read the safety _____ before operating the machinery.",
+    opts: ["guidelines", "procedures", "precautions", "instructions"],
+    ans: 4,
+    exp: "safety instructions は「安全指示書」の定型。guidelines は「指針」で遵守義務が弱い。procedures は「手順」で操作中の手順書には使うが操作前に読む文書は instructions が定型。precautions は「注意事項」で範囲が狭い。◆ before operating = 操作する前に / machinery = 機械類"
+  },
+  {
+    q: "Annual _____ fees are due at the beginning of each fiscal year.",
+    opts: ["membership", "member", "members", "memberships"],
+    ans: 1,
+    exp: "membership fees は「会費」の定型複合名詞。member fees は非標準、members は「会員」の複数形、memberships fees は冗長。◆ annual = 毎年の / are due = 支払期限である / fiscal year = 会計年度"
+  },
+  {
+    q: "The company hired a marketing _____ to handle its social media campaigns.",
+    opts: ["office", "agency", "bureau", "department"],
+    ans: 2,
+    exp: "marketing agency は「マーケティング代理店」の定型。外部委託先として agency が最適。office は事務所、bureau は政府機関、department は社内部署。◆ hired = 雇った、依頼した / to handle = 担当させるために / social media campaigns = SNSマーケティング活動"
+  },
+  {
+    q: "The decision was _____ on the results of the customer survey.",
+    opts: ["depended", "relied", "based", "founded"],
+    ans: 3,
+    exp: "be based on ～ は「～に基づいている」の定型。depend on/rely on は受動態にしないのが通例。founded は「設立された」で意味が異なる。◆ customer survey = 顧客調査"
+  },
+  {
+    q: "The company recently opened a new manufacturing _____ in Vietnam.",
+    opts: ["complex", "warehouse", "headquarters", "facility"],
+    ans: 4,
+    exp: "manufacturing facility は「製造施設」の定型。complex は「複合施設」で組み合わせが弱い。warehouse は「倉庫」、headquarters は「本社」で意味が異なる。◆ recently = 最近 / manufacturing = 製造の"
+  },
+  {
+    q: "Tickets must be purchased in _____ to receive the early-bird discount.",
+    opts: ["advance", "front", "time", "before"],
+    ans: 1,
+    exp: "in advance は「事前に」の定型句。in front は「前方に」、in time は「間に合って」。before は in の後に置けない。◆ early-bird discount = 早期割引"
+  },
+  {
+    q: "The _____ will review all proposals and announce its decision next week.",
+    opts: ["commission", "committee", "council", "board"],
+    ans: 2,
+    exp: "committee は「委員会」で提案審査に最も一般的。commission は政府の大規模委員会、council は「評議会」、board は「取締役会」。◆ review = 審査する / proposals = 提案書 / announce = 発表する"
+  },
+  {
+    q: "The marketing campaign was extremely _____, resulting in a 40% increase in sales.",
+    opts: ["succeeded", "succeeding", "successful", "successfully"],
+    ans: 3,
+    exp: "was の補語には形容詞 successful。succeeded は過去形、succeeding は現在分詞、successfully は副詞。◆ extremely = 極めて / resulting in = その結果～になった / increase in sales = 売上の増加"
+  },
+  {
+    q: "The hotel is known for providing _____ customer service.",
+    opts: ["excellence", "excellently", "excelling", "excellent"],
+    ans: 4,
+    exp: "名詞 customer service を修飾するには形容詞 excellent。excellence は名詞、excellently は副詞、excelling は現在分詞。◆ is known for = ～で知られている / customer service = 顧客サービス"
+  },
+  {
+    q: "The automotive _____ has been significantly affected by global supply chain disruptions.",
+    opts: ["industry", "factory", "product", "schedule"],
+    ans: 1,
+    exp: "automotive industry は「自動車産業」の定型。factory は「工場」で産業全体ではない、product は「製品」、schedule は「予定」で意味が異なる。◆ significantly = 大きく / global supply chain disruptions = 世界的なサプライチェーンの混乱"
+  },
+  {
+    q: "There is a $50 registration _____ for all conference attendees.",
+    opts: ["cost", "fee", "price", "fare"],
+    ans: 2,
+    exp: "registration fee は「登録料」の定型。cost は「費用全般」、price は「商品の値段」、fare は「運賃」。◆ attendees = 参加者"
+  },
+  {
+    q: "We regret to inform you that we cannot _____ returns after 30 days.",
+    opts: ["receive", "admit", "accept", "agree"],
+    ans: 3,
+    exp: "accept は「受け付ける」で返品の可否を表す。receive は「物理的に受け取る」、admit は「認める」、agree は自動詞で returns を目的語にできない。◆ We regret to inform you that = 残念ながら～をお知らせします（丁寧な拒絶の定型） / returns = 返品"
+  },
+  {
+    q: "All staff have received invitations to the _____ awards ceremony scheduled for next month.",
+    opts: ["previous", "completed", "canceled", "upcoming"],
+    ans: 4,
+    exp: "upcoming は「近く行われる予定の」で告知済みの行事に最適。previous は「前回の」で反意、completed は「終了した」、canceled は「中止された」で意味が異なる。◆ invitations to = ～への招待状 / awards ceremony = 表彰式 / scheduled for = ～に予定されている"
+  },
+  {
+    q: "Have you seen the _____ issue of the company newsletter?",
+    opts: ["latest", "newest", "recent", "last"],
+    ans: 1,
+    exp: "latest は「最新の」で定期刊行物の最新号を指す標準語。newest は製品向け、recent は最上級的意味を持たない、last は「最後の」で打ち切りの含意。◆ issue = 号、発行物 / newsletter = 社内報"
+  },
+  {
+    q: "Employees must _____ their expense reports by the end of each month.",
+    opts: ["present", "submit", "deliver", "hand"],
+    ans: 2,
+    exp: "submit は「提出する」で報告書の公式提出に最適。present は「発表する」、deliver は「配達する」、hand は hand in の形が必要。◆ expense reports = 経費報告書 / by the end of = ～の末日までに"
+  },
+  {
+    q: "Employee parking is limited, so the company encourages the use of public _____.",
+    opts: ["travel", "traffic", "transportation", "movement"],
+    ans: 3,
+    exp: "public transportation は「公共交通機関」の定型。travel は「旅行」、traffic は「交通量」、movement は「動き」で、通勤手段を指さない。◆ limited = 限られている / encourages the use of = ～の利用を推奨している"
+  },
+  {
+    q: "Please attach your _____ and a cover letter when applying for the position.",
+    opts: ["profile", "portfolio", "biography", "résumé"],
+    ans: 4,
+    exp: "résumé は求職時の経歴書。profile は「概要」、portfolio は「作品集」、biography は「伝記」。◆ attach = 添付する / cover letter = 添え状 / when applying for = ～に応募する際に / position = 職位"
+  },
+  {
+    q: "The _____ team will meet on Friday to discuss the company's long-term strategy.",
+    opts: ["executive", "maintenance", "delivery", "security"],
+    ans: 1,
+    exp: "executive team は「経営陣」の定型で、長期戦略を議論する主体として最も自然。maintenance は「保守」、delivery は「配達」、security は「警備」で、いずれも経営判断をする部門ではない。◆ long-term strategy = 長期戦略"
+  },
+  {
+    q: "Allow me to _____ our new marketing director, Ms. Yamamoto.",
+    opts: ["present", "announce", "introduce", "inform"],
+    ans: 3,
+    exp: "Allow me to introduce ～ は人物紹介の定型表現。present は「提示する」で、人物紹介の場ではほぼ使わない。announce は「発表する」で面前紹介に合わない。inform は inform + 人 + of/that の形が必要。◆ Allow me to = ～させてください / marketing director = マーケティング部長"
+  },
+  {
+    q: "The applicant has three years of _____ experience in the retail sector.",
+    opts: ["overseas", "previous", "technical", "voluntary"],
+    ans: 2,
+    exp: "previous experience は「以前の経験」の定型。overseas は「海外の」、technical は「技術的な」、voluntary は「自発的な」で、経歴の時間的な前後を表さない。◆ applicant = 応募者 / retail sector = 小売業界"
+  },
+  {
+    q: "The architect submitted a detailed _____ for the new community center.",
+    opts: ["suggestion", "plan", "recommendation", "proposal"],
+    ans: 4,
+    exp: "proposal は「提案書」で正式に提出する文書として最適。suggestion は非公式、plan は「計画」、recommendation は「勧告」。◆ architect = 建築家 / submitted = 提出した / detailed = 詳細な / community center = 公民館"
+  },
+  {
+    q: "The company needs to _____ all employees with the necessary safety equipment.",
+    opts: ["supply", "offer", "deliver", "distribute"],
+    ans: 1,
+    exp: "supply + 人 + with + 物 は「人に物を供給する」構文。offer は offer + 物 + to + 人 の形、deliver/distribute は with をほぼ使わない。◆ necessary = 必要な / safety equipment = 安全装備"
+  },
+  {
+    q: "Please find _____ a copy of the updated contract for your review.",
+    opts: ["attached", "enclosed", "included", "contained"],
+    ans: 2,
+    exp: "Please find enclosed ～ は「同封の～をご確認ください」の書簡定型。attached はメール添付用。included は「含まれている」、contained は「収容されている」で書簡定型として不自然。◆ a copy of = ～の写し / updated = 更新された / for your review = ご確認のために"
+  },
+  {
+    q: "The company has recently updated its return _____ for online purchases.",
+    opts: ["principle", "regulation", "policy", "guideline"],
+    ans: 3,
+    exp: "return policy は「返品規約」の定型。principle は「原則」、regulation は「法的規制」、guideline は「指針」。◆ online purchases = オンラインでの購入品"
+  },
+  {
+    q: "Participants are encouraged to _____ for the workshop at least one week in advance.",
+    opts: ["enlist", "subscribe", "enroll", "register"],
+    ans: 4,
+    exp: "register for ～ は参加登録の定型。enlist は「入隊する」、subscribe は「定期購読する」、enroll は enroll in の形。◆ are encouraged to = ～することが推奨される / at least one week in advance = 少なくとも1週間前に"
+  },
+  {
+    q: "Ms. Lee will _____ a meeting with the client for next Tuesday.",
+    opts: ["arrange", "prepare", "organize", "plan"],
+    ans: 1,
+    exp: "arrange a meeting は「会議を手配する」の定型。prepare は「準備する」で設定には不自然。organize は大規模イベント向け、plan は「計画する」で手配と異なる。◆ with the client = クライアントと / for next Tuesday = 来週火曜日に"
+  },
+  {
+    q: "The electricity _____ was much higher than expected this month.",
+    opts: ["cost", "charge", "bill", "payment"],
+    ans: 3,
+    exp: "electricity bill は「電気料金の請求書」の定型。cost は「費用」、charge は「料金」、payment は「支払い行為」。◆ much higher than expected = 予想よりはるかに高い"
+  },
+  {
+    q: "The restaurant plans to _____ additional staff for the holiday season.",
+    opts: ["dismiss", "hire", "transfer", "retire"],
+    ans: 2,
+    exp: "hire は「雇う」で追加人員の確保に最適。dismiss は「解雇する」で反意、transfer は「転勤させる」、retire は「退職する」で、いずれも人を新たに雇う意味にならない。◆ additional staff = 追加スタッフ / holiday season = 休暇シーズン（繁忙期）"
+  },
+  {
+    q: "The city council is expected to _____ the new budget proposal at next week's meeting.",
+    opts: ["accept", "confirm", "permit", "approve"],
+    ans: 4,
+    exp: "approve は「承認する」で予算案の公式承認に最適。accept は承認の意味が弱い、confirm は「確認」、permit は行動の許可で予算承認に不自然。◆ city council = 市議会 / is expected to = ～する見通しだ / budget proposal = 予算案"
+  },
+  {
+    q: "The research team will _____ a survey to assess customer preferences.",
+    opts: ["conduct", "compile", "launch", "commission"],
+    ans: 1,
+    exp: "conduct a survey は「調査を実施する」の定型。compile は「集成する」で一部工程のみ、launch はキャンペーン向け、commission は「外部に委託する」。◆ to assess = 評価する / customer preferences = 顧客の好み"
+  },
+  {
+    q: "This internship provides an excellent _____ to gain hands-on experience.",
+    opts: ["barrier", "opportunity", "expense", "penalty"],
+    ans: 2,
+    exp: "opportunity は「機会」で、成長・学習の好機を表す定型語。barrier は「障壁」、expense は「費用」、penalty は「罰則」で意味が合わない。◆ internship = インターンシップ / hands-on experience = 実地経験"
+  },
+  {
+    q: "The _____ for submitting grant applications is May 15th.",
+    opts: ["due date", "time limit", "deadline", "cutoff"],
+    ans: 3,
+    exp: "deadline は「締め切り」で提出期限を表す定型語。due date は「支払期日」で、申請書の締め切りにはほぼ使わない。time limit は「制限時間」で提出日ではない。cutoff は「打ち切り」で一般的でない。◆ submitting = 提出すること / grant applications = 助成金の申請書"
+  },
+  {
+    q: "The company's _____ headquarters is located in downtown Chicago.",
+    opts: ["company", "corporation", "corporately", "corporate"],
+    ans: 4,
+    exp: "corporate headquarters は「本社」の定型。corporate は形容詞。company/corporation は名詞、corporately は副詞。◆ is located in = ～に位置している / downtown = 中心街"
+  },
+  {
+    q: "The laptop comes with a two-year _____ that covers all manufacturing defects.",
+    opts: ["warranty", "discount", "subscription", "receipt"],
+    ans: 1,
+    exp: "warranty は「製品保証」で製造欠陥をカバーする標準語。discount は「割引」、subscription は「定期購読」、receipt は「領収書」で意味が異なる。◆ comes with = ～が付属している / manufacturing defects = 製造上の欠陥"
+  },
+  {
+    q: "It is _____ for all employees to wear an ID badge while in the building.",
+    opts: ["delight", "necessary", "profit", "leisure"],
+    ans: 2,
+    exp: "necessary は「必要な」で、It is necessary for + 人 + to do の定型。delight は「喜び」、profit は「利益」、leisure は「余暇」で意味が合わない。◆ ID badge = 社員証 / while in the building = 建物内にいる間"
+  },
+  {
+    q: "I would like to _____ a conference room for the team meeting on Thursday.",
+    opts: ["book for", "save up", "reserve", "hold on"],
+    ans: 3,
+    exp: "reserve は「予約する」で直接目的語をとる。book for は for が余計、save up は「貯金する」、hold on は「待つ」。◆ conference room = 会議室"
+  },
+  {
+    q: "All _____ of the apartment complex are required to follow the building rules.",
+    opts: ["visitors", "managers", "owners", "residents"],
+    ans: 4,
+    exp: "resident は「居住者」で集合住宅に住んでいる人。visitor は「訪問者」、manager は「管理者」、owner は「所有者」で、実際にそこに住んでいる人を指さない。◆ apartment complex = 集合住宅 / are required to = ～が求められている / building rules = 建物の規則"
+  },
+  {
+    q: "The graphic designer was asked to _____ a new logo for the company.",
+    opts: ["create", "produce", "construct", "invent"],
+    ans: 1,
+    exp: "create は「創作する」でデザイン作品に最適。produce は「生産する」で工業的、construct は「建設する」、invent は「発明する」。◆ graphic designer = グラフィックデザイナー / was asked to = ～するよう依頼された"
+  },
+  {
+    q: "We would like to _____ you that your application has been approved.",
+    opts: ["tell", "inform", "notify", "announce"],
+    ans: 2,
+    exp: "inform + 人 + that は公式通知の定型。tell は人目的語をとるが、We would like to tell you の形は公式文書ではほぼ使わない。notify は notify + 人 + of の形をとり that 節との相性が弱い。announce は人目的語をとらない。◆ We would like to inform you that = ～をお知らせいたします（通知の定型） / has been approved = 承認されました"
+  },
+  {
+    q: "Employees are not _____ to use personal devices during working hours.",
+    opts: ["required", "encouraged", "allowed", "expected"],
+    ans: 3,
+    exp: "are not allowed to は「許可されていない」の定型。required は「求められている」、encouraged は「推奨されている」、expected は「期待されている」で、いずれも禁止の意味にならない。◆ personal devices = 個人端末 / working hours = 勤務時間"
+  },
+  {
+    q: "I forgot to _____ that the office will be closed on Monday.",
+    opts: ["speak", "tell", "talk", "mention"],
+    ans: 4,
+    exp: "mention は「言及する」で that 節を直接とれる。speak と talk は自動詞で that 節を直接とれない。tell は tell + 人 + that の形で人目的語が必要。◆ forgot to = ～するのを忘れた / will be closed = 閉まる予定"
+  },
+  {
+    q: "We greatly _____ your continued support of our organization.",
+    opts: ["appreciate", "reduce", "delay", "ignore"],
+    ans: 1,
+    exp: "appreciate は「感謝する」の定型。reduce は「減らす」、delay は「遅らせる」、ignore は「無視する」で意味が逆または無関係。◆ greatly = 大いに / continued support = 引き続きのご支援"
+  },
+  {
+    q: "We will send a _____ for the defective item within three business days.",
+    opts: ["substitute", "replacement", "exchange", "alternative"],
+    ans: 2,
+    exp: "replacement は「交換品」で不良品の代替として定型。substitute は「代用品」で異なる物の含意、exchange は「交換行為」、alternative は「代替案」。◆ defective item = 不良品 / within three business days = 3営業日以内に"
+  },
+  {
+    q: "The sales associate set up an attractive product _____ near the store entrance.",
+    opts: ["arrangement", "exhibition", "display", "showcase"],
+    ans: 3,
+    exp: "product display は「商品陳列」の定型。arrangement は定型語ではない、exhibition は店舗には大げさ、showcase は「陳列ケース（家具）」。◆ sales associate = 販売員 / set up = 設置した / attractive = 魅力的な / entrance = 入口"
+  },
+  {
+    q: "The hiring committee identified three strong _____ for the director position.",
+    opts: ["candidates", "assistants", "customers", "volunteers"],
+    ans: 1,
+    exp: "candidate は有力候補者。assistant は「助手」、customer は「顧客」、volunteer は「ボランティア」で、採用選考の対象者を指さない。◆ hiring committee = 採用委員会 / identified = 見出した / strong = 有力な"
+  },
+  {
+    q: "The company policy clearly _____ that overtime must be approved by a supervisor.",
+    opts: ["speaks", "announces", "declares", "states"],
+    ans: 4,
+    exp: "state は「明記する」で規則・方針が内容を示す際の定型。speak は人が主語の自動詞で policy が主語には合わない。announce は「公表する」でニュース向き。declare は「宣言する」で公式声明向きであり、社内規定の記述にはほぼ使わない。◆ company policy = 社内規定 / overtime = 残業 / supervisor = 上司"
+  },
+  {
+    q: "The museum's latest _____ features artwork from local artists.",
+    opts: ["demonstration", "exhibit", "display", "performance"],
+    ans: 2,
+    exp: "exhibit は「展覧会、展示企画」で美術館の企画展を指す語。demonstration は「実演」で美術作品に合わない。display は「陳列」で店舗向きであり、美術館の企画展にはほぼ使わない。performance は「公演」で美術作品に合わない。◆ features = 特集している / artwork = 芸術作品 / local artists = 地元のアーティスト"
+  },
+  {
+    q: "The afternoon _____ of the conference will focus on digital marketing trends.",
+    opts: ["session", "period", "segment", "phase"],
+    ans: 1,
+    exp: "conference session は「カンファレンスのセッション」の定型。period は「期間」で会議プログラムの区分にはほぼ使わない。segment は「部分」で放送番組向きであり、会議ではほぼ使わない。phase は「段階」で意味が異なる。◆ will focus on = ～に焦点を当てる / digital marketing trends = デジタルマーケティングの動向"
+  },
+  {
+    q: "The inspector made a _____ of all the safety violations found during the audit.",
+    opts: ["record", "list", "report", "note"],
+    ans: 4,
+    exp: "make a note of ～ は「～を書き留める」の定型句。record は「記録」で正式な文書作成を指す。list は「一覧」で整理された表を指す。report は「報告書」で提出用の文書を指す。検査中にその場で書き留める行為は note が定型。◆ inspector = 検査官 / safety violations = 安全違反 / audit = 監査"
+  },
+  {
+    q: "All returned items will be _____ within five business days.",
+    opts: ["progressed", "proceeded", "processed", "produced"],
+    ans: 3,
+    exp: "process は動詞「処理する」。progress/proceed は自動詞で受動態にできない。produce は「生産する」で不適。◆ returned items = 返品された商品 / within five business days = 5営業日以内に"
+  },
+  {
+    q: "Employees should carefully follow the _____ provided in the safety manual.",
+    opts: ["indications", "instructions", "introductions", "inspections"],
+    ans: 2,
+    exp: "instructions は「指示」。indications は「兆候」、introductions は「紹介」、inspections は「検査」で不適。◆ carefully = 注意深く / provided in = ～に記載されている / safety manual = 安全マニュアル"
+  },
+  {
+    q: "The gym offers a discounted _____ rate for students and senior citizens.",
+    opts: ["admission", "subscription", "entry", "membership"],
+    ans: 4,
+    exp: "membership rate は「会員料金」の定型。admission は「入場料（1回限り）」、subscription は「定期購読料」、entry は料金を表す語ではない。◆ discounted = 割引された / senior citizens = 高齢者"
+  },
+  {
+    q: "The travel _____ arranged flights and hotel reservations for the entire team.",
+    opts: ["agency", "office", "company", "service"],
+    ans: 1,
+    exp: "travel agency は「旅行代理店」の定型。office/company は一般的すぎる、service は agency ほど定型的でない。◆ arranged = 手配した / hotel reservations = ホテルの予約 / entire = 全体の"
+  },
+  {
+    q: "The new policy is _____ on employee feedback collected during the annual survey.",
+    opts: ["formed", "based", "built", "established"],
+    ans: 2,
+    exp: "be based on ～ は「～に基づいている」の定型。formed on は英語として成立しない（formed from/by が正しい）。built on は「～の上に建てられた」で物理的な基盤を指す。established on は英語として成立しない。◆ employee feedback = 従業員の意見 / collected during = ～の間に収集された / annual survey = 年次調査"
+  },
+  {
+    q: "The hotel includes a fitness _____ on the second floor for guests.",
+    opts: ["invoice", "permit", "facility", "salary"],
+    ans: 3,
+    exp: "fitness facility は「フィットネス施設」の定型。invoice は「請求書」、permit は「許可証」、salary は「給与」で意味が合わない。◆ on the second floor = 2階に"
+  },
+  {
+    q: "All conference registrations must be completed at least two weeks in _____.",
+    opts: ["before", "front", "early", "advance"],
+    ans: 4,
+    exp: "in advance は「事前に」の定型句。他の選択肢はこの形で成立しない。◆ registrations = 登録手続き / at least = 少なくとも"
+  },
+  {
+    q: "The planning _____ has been working on the budget for the annual gala.",
+    opts: ["committee", "commission", "assembly", "congress"],
+    ans: 1,
+    exp: "planning committee は「企画委員会」の定型。commission は政府向け、assembly は「集会」、congress は「議会」。◆ has been working on = ～に取り組んでいる / budget = 予算 / annual gala = 年次ガラ（祝賀行事）"
+  },
+  {
+    q: "The company has _____ expanded into three new international markets this year.",
+    opts: ["succeeding", "successfully", "successive", "success"],
+    ans: 2,
+    exp: "動詞 expanded を修飾するには副詞 successfully。succeeding は形容詞「次の」、successive は「連続の」、success は名詞。◆ expanded into = ～に進出した / international markets = 国際市場"
+  },
+  {
+    q: "The intern demonstrated _____ communication skills during the group presentation.",
+    opts: ["excellence", "excelled", "excellent", "excelling"],
+    ans: 3,
+    exp: "名詞 communication skills を修飾するには形容詞 excellent。excellence は名詞、excelled は過去形、excelling は現在分詞。◆ intern = インターン生 / demonstrated = 発揮した / group presentation = グループ発表"
+  },
+  {
+    q: "Government regulations have a significant impact on the healthcare _____.",
+    opts: ["industrial", "industrialize", "industrious", "industry"],
+    ans: 4,
+    exp: "healthcare industry は「医療産業」の定型。名詞位置に入るのは industry のみ。industrial は形容詞、industrialize は動詞、industrious は「勤勉な」。◆ government regulations = 政府の規制 / have a significant impact on = ～に大きな影響を与える"
+  },
+  {
+    q: "Membership _____ can be paid monthly or annually.",
+    opts: ["fees", "costs", "prices", "fares"],
+    ans: 1,
+    exp: "membership fees は「会費」の定型。costs は「費用」、prices は「価格」、fares は「運賃」。◆ monthly = 毎月 / annually = 毎年"
+  },
+  {
+    q: "The store does not _____ personal checks as a form of payment.",
+    opts: ["receive", "accept", "admit", "approve"],
+    ans: 2,
+    exp: "accept は「受け付ける」で支払い方法の可否を表す。receive は可否を含意しない、admit は「認める」、approve は「承認する」で不自然。◆ personal checks = 個人小切手 / as a form of payment = 支払い方法として"
+  },
+  {
+    q: "Employees were reminded about the _____ company picnic next Saturday.",
+    opts: ["broken", "quiet", "upcoming", "local"],
+    ans: 3,
+    exp: "upcoming は「近く行われる予定の」で、next Saturday に予定されたイベントに最も自然。broken は「壊れた」、quiet は「静かな」、local は「地元の」で、イベントの予告を表さない。◆ were reminded about = ～について念押しされた / company picnic = 会社のピクニック"
+  },
+  {
+    q: "Customers can download the _____ version of the software from our website.",
+    opts: ["last", "newest", "recent", "latest"],
+    ans: 4,
+    exp: "latest version は「最新版」の定型。last は「最後の」で終了・打ち切りの含意がある。newest は「最も新しい」で製品の新旧比較向きであり、ソフトウェアの更新版にはほぼ使わない。recent は「最近の」で「最新」の意味にならない。◆ download = ダウンロードする / software = ソフトウェア"
+  },
+  {
+    q: "All proposals must be _____ electronically through the online portal.",
+    opts: ["submitted", "committed", "transmitted", "permitted"],
+    ans: 1,
+    exp: "be submitted は「提出される」の定型。commit は「委ねる」、transmit は proposals にやや不自然、permit は「許可する」。◆ electronically = 電子的に / through = ～を通じて / online portal = オンラインポータル"
+  },
+  {
+    q: "The hotel provides complimentary _____ to and from the airport.",
+    opts: ["furniture", "transportation", "equipment", "stationery"],
+    ans: 2,
+    exp: "complimentary transportation は「無料送迎サービス」の定型。furniture は「家具」、equipment は「設備」、stationery は「文房具」で意味が合わない。◆ complimentary = 無料の / to and from = ～への往復"
+  },
+  {
+    q: "Be sure to highlight relevant skills and qualifications on your _____.",
+    opts: ["profile", "application", "résumé", "certificate"],
+    ans: 3,
+    exp: "résumé はスキルや資格を記載する求職書類。profile は「プロフィール」、application は全体、certificate は「証明書」。◆ Be sure to = 必ず～してください / highlight = 強調する / relevant = 関連性のある / qualifications = 資格"
+  },
+  {
+    q: "The company appointed a new chief _____ officer last month.",
+    opts: ["executor", "executing", "execution", "executive"],
+    ans: 4,
+    exp: "chief executive officer (CEO) は「最高経営責任者」の定型。executor は「遺言執行者」、executing は現在分詞、execution は「実行」。◆ appointed = 任命した"
+  },
+  {
+    q: "The company plans to _____ a new line of organic products this spring.",
+    opts: ["introduce", "present", "produce", "promote"],
+    ans: 1,
+    exp: "introduce は「新製品を市場に出す」の定型。present は「提示する」、produce は「製造する」、promote は「宣伝する」で市場投入の意味にならない。◆ a new line of = ～の新ライン / organic products = オーガニック製品"
+  },
+  {
+    q: "Compared to the _____ quarter, sales have increased by 15%.",
+    opts: ["following", "final", "previous", "opening"],
+    ans: 3,
+    exp: "previous quarter は「前四半期」の定型。following は「次の」で反意、final は「最後の」、opening は「最初の」で、直前の四半期を指す意味にならない。◆ Compared to = ～と比較して / quarter = 四半期 / have increased by = ～だけ増加した"
+  },
+  {
+    q: "The board rejected the _____ due to insufficient funding details.",
+    opts: ["suggestion", "proposal", "request", "petition"],
+    ans: 2,
+    exp: "proposal は取締役会が審議する「提案書」として最適。suggestion は非公式、request は「依頼」、petition は「請願書」。◆ board = 取締役会 / rejected = 却下した / due to = ～のために / insufficient = 不十分な"
+  },
+  {
+    q: "The office manager ordered more _____ because the printer was running low on paper.",
+    opts: ["equipment", "materials", "inventory", "supplies"],
+    ans: 4,
+    exp: "office supplies は「事務用品」の定型。equipment は「大型設備」、materials は「原材料」、inventory は「在庫」。◆ ordered = 注文した / was running low on = ～が残り少なくなっていた"
+  },
+  {
+    q: "I have _____ my résumé and three letters of recommendation with this application package.",
+    opts: ["attached", "included", "enclosed", "submitted"],
+    ans: 3,
+    exp: "enclose は「同封する」。application package で物理的郵送物が明確なので enclosed が最適。attached はメール添付用、included は「含めた」、submitted は「提出した」。◆ letters of recommendation = 推薦状 / application package = 応募書類一式"
+  },
+  {
+    q: "The company's privacy _____ outlines how customer data is collected and stored.",
+    opts: ["policy", "principle", "regulation", "protocol"],
+    ans: 1,
+    exp: "privacy policy は「プライバシーポリシー」の定型。principle は「原則」、regulation は「法的規制」、protocol は「手順」。◆ outlines = 概要を述べる / customer data = 顧客データ"
+  },
+  {
+    q: "Over 300 attendees have already _____ for the annual industry conference.",
+    opts: ["enrolled", "subscribed", "registered", "signed"],
+    ans: 3,
+    exp: "register for ～ は会議参加の定型。enroll は enroll in の形、subscribe は「定期購読」、signed は sign up for が必要。◆ over 300 = 300人以上 / attendees = 参加者 / have already = すでに～した"
+  },
+  {
+    q: "The assistant has _____ for a car to pick you up from the airport.",
+    opts: ["organized", "prepared", "planned", "arranged"],
+    ans: 4,
+    exp: "arrange for ～ to do は「～する手配をする」の定型。他の動詞はこの構文を自然にとらない。◆ to pick you up = あなたを迎えに来る / from the airport = 空港から"
+  },
+  {
+    q: "Guests should settle their _____ at the front desk before checking out.",
+    opts: ["bill", "cost", "charge", "debt"],
+    ans: 1,
+    exp: "settle the bill は「勘定を清算する」の定型句。cost/charge/debt はこの定型にならない。◆ front desk = フロント（受付） / before checking out = チェックアウトする前に"
+  },
+  {
+    q: "The company decided to _____ an outside consultant for the project.",
+    opts: ["employ", "hire", "recruit", "assign"],
+    ans: 2,
+    exp: "hire は外部コンサルタントへの委託に最適。employ は長期雇用含意、recruit は採用前段階、assign は既存社員の配置。◆ outside consultant = 外部コンサルタント"
+  },
+  {
+    q: "The manager must _____ all travel expense claims before reimbursement.",
+    opts: ["accept", "confirm", "approve", "permit"],
+    ans: 3,
+    exp: "approve は「承認する」で経費の公式承認に最適。accept は承認の権限を表さない、confirm は「確認」、permit は行動の許可で不自然。◆ travel expense claims = 出張費の請求 / reimbursement = 経費の払い戻し"
+  },
+  {
+    q: "The HR department will _____ interviews with all shortlisted candidates next week.",
+    opts: ["make", "perform", "do", "conduct"],
+    ans: 4,
+    exp: "conduct interviews は「面接を行う」の定型。make/do/perform interviews は非標準。◆ HR department = 人事部 / shortlisted = 最終候補に残った"
+  },
+  {
+    q: "The company offers employees the _____ to work remotely twice a week.",
+    opts: ["opportunity", "deadline", "requirement", "difficulty"],
+    ans: 1,
+    exp: "opportunity to do は「～する機会」の定型。deadline は「締め切り」、requirement は「要件」、difficulty は「困難」で、機会の意味にならない。◆ work remotely = リモートで働く / twice a week = 週に2回"
+  },
+  {
+    q: "We need to move quickly to meet the _____ for the project submission.",
+    opts: ["timeline", "deadline", "schedule", "target"],
+    ans: 2,
+    exp: "meet the deadline は「締め切りに間に合う」の定型句。timeline は「予定表」で締め切りそのものではない。schedule は「スケジュール」で全体の予定を指し提出期限を指さない。target は「目標」で意味が異なる。◆ move quickly = 素早く行動する / submission = 提出"
+  },
+  {
+    q: "The annual _____ retreat will be held in Kyoto this year.",
+    opts: ["company", "corporation", "corporate", "cooperate"],
+    ans: 3,
+    exp: "corporate retreat は「企業リトリート」の定型。corporate は形容詞。company/corporation は名詞、cooperate は動詞。◆ annual = 年次の / retreat = 研修旅行、合宿 / will be held = 開催される予定"
+  },
+  {
+    q: "This printer comes with a one-year _____ from the manufacturer.",
+    opts: ["refund", "deposit", "brochure", "warranty"],
+    ans: 4,
+    exp: "warranty は「製品保証」で、メーカーが提供する保証の標準語。refund は「返金」、deposit は「保証金、預金」、brochure は「パンフレット」で意味が異なる。◆ comes with = ～が付属している / manufacturer = メーカー、製造元"
+  },
+  {
+    q: "Please bring all _____ documents to the appointment.",
+    opts: ["necessary", "necessity", "necessarily", "necessitate"],
+    ans: 1,
+    exp: "necessary は形容詞「必要な」。necessity は名詞、necessarily は副詞、necessitate は動詞。◆ appointment = 予約、面談"
+  },
+  {
+    q: "These seats are _____ for VIP guests only.",
+    opts: ["sold", "reserved", "closed", "parked"],
+    ans: 2,
+    exp: "be reserved for ～ は「～のために確保されている」の定型。sold は「売られた」、closed は「閉鎖された」、parked は「駐車された」で意味が合わない。◆ VIP guests = VIPゲスト / only = ～専用"
+  },
+  {
+    q: "Local _____ have expressed concerns about the proposed construction project.",
+    opts: ["tourists", "businesses", "residents", "officials"],
+    ans: 3,
+    exp: "residents は「住民」で地域に住んでいる人。tourists は「観光客」、businesses は「企業」、officials は「役人」で、地元住民を指さない。◆ have expressed concerns about = ～について懸念を表明した / proposed = 計画中の"
+  },
+  {
+    q: "The team worked together to _____ a new training program for employees.",
+    opts: ["borrow", "delay", "destroy", "create"],
+    ans: 4,
+    exp: "create は「作り出す、開発する」で、新しいプログラムの構築に最適。borrow は「借りる」、delay は「遅らせる」、destroy は「破壊する」で意味が合わない。◆ worked together = 協力して / training program = 研修プログラム"
+  },
+  {
+    q: "Employees will be _____ of any changes to the schedule via email.",
+    opts: ["informed", "told", "announced", "communicated"],
+    ans: 1,
+    exp: "be informed of ～ は公式通知の定型。told は口語的、announced は人を主語にした受動態にならない、communicated は communicated to が必要。◆ any changes to = ～への変更 / via email = メールを通じて"
+  },
+  {
+    q: "The building regulations do not _____ modifications without prior approval.",
+    opts: ["let", "allow", "agree", "admit"],
+    ans: 2,
+    exp: "allow は「許可する」で直接目的語をとれる。let は物の目的語に不自然、agree は自動詞、admit は「認める」で不適。◆ building regulations = 建築規制 / modifications = 改修 / without = ～なしに / prior approval = 事前承認"
+  },
+  {
+    q: "The manager did not _____ the reason for the delay during the meeting.",
+    opts: ["say", "tell", "mention", "speak"],
+    ans: 3,
+    exp: "mention は「言及する」で直接目的語をとれる。say は the reason を直接目的語にすると不自然、tell は人目的語が必要、speak は自動詞。◆ the reason for = ～の理由 / delay = 遅延"
+  },
+  {
+    q: "If you could respond by Friday, I would greatly _____ it.",
+    opts: ["value", "welcome", "admire", "appreciate"],
+    ans: 4,
+    exp: "I would appreciate it は感謝のビジネスメール定型句。value は「重視する」、welcome は「歓迎する」、admire は「賞賛する」。◆ If you could = もし～していただけたら / respond = 返答する / I would greatly appreciate it = 大変ありがたく存じます（丁寧な依頼の結び）"
+  },
+  {
+    q: "The technician determined that a complete _____ of the heating unit was necessary.",
+    opts: ["repair", "replacement", "renovation", "restoration"],
+    ans: 2,
+    exp: "replacement は「交換」で全面的な取り替え。repair は「修理」で全面交換ではない、renovation は「改装」で建物向け、restoration は「復元」で新品交換には不適。◆ technician = 技術者 / determined that = ～と判断した / heating unit = 暖房装置"
+  },
+];
+QUESTIONS.push(...QUESTIONS_DATA);
+
+
+// =============================================================================
+// QUIZ LOGIC
+// =============================================================================
+(function() {
+  // ============================================================
+  // SESSION CONFIG — 各回ごとにここを書き換える
+  // ============================================================
+  const SESSION_NUMBER = 2;     // 第何回か（1〜15）
+  const SESSION_TITLE = '';     // 回のサブタイトル（任意、空欄可）例: '金フレ 頻出50語'
+  // ============================================================
+
+  const STORAGE_KEY = 'toeic_quiz_progress_v2_s' + SESSION_NUMBER;
+  const TOTAL = 0; // will be set after data loaded
+  const app = document.getElementById('app');
+
+  // Fisher–Yates shuffle
+  function shuffleArray(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function makeOrder() {
+    return shuffleArray(Array.from({length: QUESTIONS.length}, (_, i) => i));
+  }
+
+  // Get the current question based on shuffled order
+  function currentQ() {
+    return QUESTIONS[state.order[state.index]];
+  }
+
+  let state = {
+    mode: 'start',      // 'start' | 'quiz' | 'result' | 'review'
+    index: 0,           // current position in shuffled order (0-99)
+    answers: [],        // index = position in shuffled order
+    answered: false,
+    reviewList: [],     // positions in shuffled order
+    reviewPos: 0,
+    studentName: '',
+    studentId: '',
+    completedAt: null,
+    order: [],          // shuffled indices into QUESTIONS array
+  };
+
+  function save() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        index: state.index,
+        answers: state.answers,
+        studentName: state.studentName,
+        studentId: state.studentId,
+        completedAt: state.completedAt,
+        order: state.order,
+      }));
+    } catch(e) {}
+  }
+
+  function load() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+      return JSON.parse(raw);
+    } catch(e) { return null; }
+  }
+
+  function clearSave() {
+    try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
+  }
+
+  function countAnswered() {
+    return state.answers.filter(a => a != null).length;
+  }
+
+  function countCorrect() {
+    return state.answers.filter(a => a && a.correct).length;
+  }
+
+  function countWrong() {
+    return state.answers.filter(a => a && !a.correct).length;
+  }
+
+  function render() {
+    if (state.mode === 'start') renderStart();
+    else if (state.mode === 'quiz') renderQuiz();
+    else if (state.mode === 'result') renderResult();
+    else if (state.mode === 'review') renderReview();
+    window.scrollTo({top:0, behavior:'instant'});
+  }
+
+  function renderHeader(showMeta) {
+    const answered = countAnswered();
+    const total = QUESTIONS.length;
+    const correct = countCorrect();
+    const percent = answered > 0 ? Math.round((correct / answered) * 100) : 0;
+    const sessionLabel = `第${SESSION_NUMBER}回`;
+    return `
+      <div class="header">
+        <div class="brand">
+          <span class="brand-session">${sessionLabel}</span>
+          <span class="brand-main">TOEIC用語彙</span>
+          ${SESSION_TITLE ? `<span class="brand-sub">${escapeHtml(SESSION_TITLE)}</span>` : ''}
+        </div>
+        ${showMeta ? `<div class="meta">${answered}/${total} · ${percent}%</div>` : ''}
+      </div>
+    `;
+  }
+
+  function renderProgress() {
+    const answered = countAnswered();
+    const total = QUESTIONS.length;
+    const correct = countCorrect();
+    const wrong = countWrong();
+    const percent = (answered / total) * 100;
+    return `
+      <div class="progress-wrap">
+        <div class="progress-bar">
+          <div class="progress-fill" style="width:${percent}%"></div>
+        </div>
+        <div class="progress-stats">
+          <span>Q.${state.index + 1} <strong>/ ${total}</strong></span>
+          <span>正答 <strong>${correct}</strong> · 誤答 <strong>${wrong}</strong></span>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderStart() {
+    const saved = load();
+    const hasSaved = saved && saved.answers && saved.answers.some(a => a != null);
+    const answered = hasSaved ? saved.answers.filter(a => a != null).length : 0;
+    const correct = hasSaved ? saved.answers.filter(a => a && a.correct).length : 0;
+
+    app.innerHTML = `
+      ${renderHeader(false)}
+      <div class="start">
+        <div class="start-eyebrow">Practice Set · for Japanese Learners</div>
+        <h1 class="start-title">TOEIC用語彙</h1>
+        <div class="start-title-en">100 Questions in Business Context</div>
+        <p class="start-desc">
+          TOEIC頻出ビジネス語彙のPart 5形式穴埋め問題集。100問をランダム順で出題。
+          1問ずつ即時に正誤判定と解説が表示され、正解文の音声も再生される。
+        </p>
+
+        <div class="start-specs">
+          <div class="spec">
+            <div class="spec-label">Questions</div>
+            <div class="spec-value">100</div>
+          </div>
+          <div class="spec">
+            <div class="spec-label">Format</div>
+            <div class="spec-value">4 Choice</div>
+          </div>
+          <div class="spec">
+            <div class="spec-label">Focus</div>
+            <div class="spec-value">Part 5</div>
+          </div>
+        </div>
+
+        ${hasSaved ? `
+          <div class="resume-note">
+            前回の記録：<strong>${answered}/${QUESTIONS.length}問</strong> 回答済み・正答 <strong>${correct}</strong>問
+            ${saved.studentName ? `<br>記録者：<strong>${escapeHtml(saved.studentName)}</strong>${saved.studentId ? ` (${escapeHtml(saved.studentId)})` : ''}` : ''}
+          </div>
+        ` : ''}
+
+        <div class="name-form">
+          <div class="name-field">
+            <label class="name-label" for="input-name">Student Name <span class="jp">氏名（必須）</span></label>
+            <input type="text" id="input-name" class="name-input" placeholder="例：山田 太郎" value="${escapeHtml(saved && saved.studentName ? saved.studentName : '')}" autocomplete="name" required>
+          </div>
+          <div class="name-field">
+            <label class="name-label" for="input-id">Student ID <span class="jp">学籍番号（任意）</span></label>
+            <input type="text" id="input-id" class="name-input" placeholder="例：2026001" value="${escapeHtml(saved && saved.studentId ? saved.studentId : '')}" autocomplete="off">
+          </div>
+          <div class="name-error" id="name-error"></div>
+        </div>
+
+        <div class="btn-row">
+          ${hasSaved ? `
+            <button class="btn" data-action="resume">
+              続きから <span class="btn-arrow">→</span>
+            </button>
+            <button class="btn btn-ghost" data-action="restart">最初から</button>
+          ` : `
+            <button class="btn" data-action="start">
+              開始する <span class="btn-arrow">→</span>
+            </button>
+          `}
+        </div>
+
+        <div class="footer">© Kaoruko Takechi 2026</div>
+      </div>
+    `;
+
+    app.querySelectorAll('[data-action]').forEach(el => {
+      el.addEventListener('click', () => {
+        const act = el.dataset.action;
+        const nameInput = document.getElementById('input-name');
+        const idInput = document.getElementById('input-id');
+        const errorEl = document.getElementById('name-error');
+        const nameVal = nameInput ? nameInput.value.trim() : '';
+        const idVal = idInput ? idInput.value.trim() : '';
+
+        if (act === 'start' || act === 'restart') {
+          if (!nameVal) {
+            if (errorEl) errorEl.textContent = '氏名を入力してください。';
+            if (nameInput) nameInput.focus();
+            return;
+          }
+          state.studentName = nameVal;
+          state.studentId = idVal;
+          state.completedAt = null;
+          state.answers = new Array(QUESTIONS.length).fill(null);
+          state.order = makeOrder();
+          state.index = 0;
+          state.answered = false;
+          state.mode = 'quiz';
+          clearSave();
+          save();
+          render();
+        } else if (act === 'resume') {
+          if (!nameVal) {
+            if (errorEl) errorEl.textContent = '氏名を入力してください。';
+            if (nameInput) nameInput.focus();
+            return;
+          }
+          const s = load();
+          state.studentName = nameVal;
+          state.studentId = idVal;
+          state.completedAt = s && s.completedAt ? s.completedAt : null;
+          state.answers = s && s.answers && s.answers.length === QUESTIONS.length
+            ? s.answers
+            : new Array(QUESTIONS.length).fill(null);
+          state.order = s && s.order && s.order.length === QUESTIONS.length
+            ? s.order
+            : makeOrder();
+          state.index = s && typeof s.index === 'number' ? Math.min(s.index, QUESTIONS.length - 1) : 0;
+          state.answered = state.answers[state.index] != null;
+          state.mode = 'quiz';
+          save();
+          render();
+        }
+      });
+    });
+  }
+
+  function renderQuiz() {
+    // Safety: if order is missing (old save), generate now
+    if (!state.order || state.order.length !== QUESTIONS.length) {
+      state.order = makeOrder();
+      save();
+    }
+    const q = currentQ();
+    const existing = state.answers[state.index];
+    const answered = existing != null;
+    state.answered = answered;
+
+    app.innerHTML = `
+      ${renderHeader(true)}
+      ${renderProgress()}
+      <div class="question-num">Question ${state.index + 1}</div>
+      <div class="question">${escapeHtml(q.q)}</div>
+      <div class="options">
+        ${q.opts.map((opt, i) => {
+          const num = i + 1;
+          const letter = String.fromCharCode(65 + i);
+          let cls = 'option';
+          if (answered) {
+            cls += ' dimmed';
+            if (num === q.ans) cls = 'option correct';
+            else if (num === existing.chosen) cls = 'option wrong';
+          }
+          return `
+            <button class="${cls}" data-num="${num}" ${answered ? 'disabled' : ''}>
+              <span class="option-letter">(${letter})</span>
+              <span class="option-text">${escapeHtml(opt)}</span>
+            </button>
+          `;
+        }).join('')}
+      </div>
+      ${answered ? renderFeedback(q, existing) : ''}
+      <div class="nav">
+        <button class="nav-quit" data-action="quit">一時中断して最初に戻る</button>
+        ${answered ? `
+          <button class="btn" data-action="next">
+            ${state.index === QUESTIONS.length - 1 ? '結果を見る' : '次の問題'} <span class="btn-arrow">→</span>
+          </button>
+        ` : ''}
+      </div>
+      <div class="footer">© Kaoruko Takechi 2026</div>
+    `;
+
+    app.querySelectorAll('.option:not([disabled])').forEach(el => {
+      el.addEventListener('click', () => {
+        const num = parseInt(el.dataset.num, 10);
+        const correct = num === q.ans;
+        state.answers[state.index] = { chosen: num, correct: correct };
+        state.answered = true;
+        save();
+        render();
+        // Auto-speak correct sentence on every answer
+        const fullSentence = q.q.replace(/_____/g, q.opts[q.ans - 1]);
+        setTimeout(() => speakRandom(fullSentence), 300);
+      });
+    });
+
+    // Accent button handlers
+    app.querySelectorAll('.accent-btn').forEach(el => {
+      el.addEventListener('click', () => {
+        const text = el.dataset.speak;
+        const accent = el.dataset.accent;
+        if (text) speakSentence(text, accent);
+      });
+    });
+
+    app.querySelectorAll('[data-action]').forEach(el => {
+      el.addEventListener('click', () => {
+        const act = el.dataset.action;
+        if (act === 'next') {
+          if (state.index === QUESTIONS.length - 1) {
+            state.mode = 'result';
+          } else {
+            state.index++;
+            state.answered = state.answers[state.index] != null;
+          }
+          save();
+          render();
+        } else if (act === 'quit') {
+          state.mode = 'start';
+          render();
+        }
+      });
+    });
+  }
+
+  function renderFeedback(q, ans) {
+    const isCorrect = ans.correct;
+    const letter = String.fromCharCode(64 + q.ans);
+    const correctWord = q.opts[q.ans - 1];
+    const fullSentence = q.q.replace(/_____/g, correctWord);
+    return `
+      <div class="feedback ${isCorrect ? 'correct' : 'wrong'}">
+        <div class="feedback-verdict">
+          ${isCorrect ? 'Correct' : 'Incorrect'}
+          <span class="feedback-verdict-jp">${isCorrect ? '正解' : '不正解'} · 正答は (${letter}) <span class="feedback-correct-answer">${escapeHtml(correctWord)}</span></span>
+        </div>
+        <div class="feedback-sentence ${isCorrect ? '' : 'wrong-sentence'}">
+          <span class="feedback-sentence-text">${escapeHtml(fullSentence)}</span>
+          <div class="accent-btns">
+            ${renderAccentButtons(fullSentence)}
+          </div>
+        </div>
+        <div class="feedback-body">${escapeHtml(q.exp)}</div>
+      </div>
+    `;
+  }
+
+  // === Text-to-Speech with Accent Support ===
+  const ACCENTS = [
+    { code: 'en-US', label: 'US', flag: '🇺🇸' },
+    { code: 'en-GB', label: 'UK', flag: '🇬🇧' },
+  ];
+
+  function getVoiceForAccent(accentCode) {
+    const voices = window.speechSynthesis.getVoices();
+    const code = accentCode.replace('_', '-');
+    // Exact match (en-GB)
+    let v = voices.find(v => v.lang.replace('_', '-') === code);
+    // Prefix match (en-GB-*)
+    if (!v) v = voices.find(v => v.lang.replace('_', '-').startsWith(code));
+    // Any English fallback
+    if (!v) v = voices.find(v => v.lang.startsWith('en'));
+    return v || null;
+  }
+
+  function speakSentence(text, accentCode) {
+    try {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      // Delay after cancel to avoid Chrome bug where speak() is silently dropped
+      setTimeout(() => {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = accentCode || 'en-US';
+        utterance.rate = 1.1;
+        utterance.pitch = 1;
+        const voice = getVoiceForAccent(accentCode || 'en-US');
+        if (voice) utterance.voice = voice;
+        window.speechSynthesis.speak(utterance);
+      }, 100);
+    } catch(e) { /* TTS not available */ }
+  }
+
+  function speakRandom(text) {
+    const accent = ACCENTS[Math.floor(Math.random() * ACCENTS.length)];
+    speakSentence(text, accent.code);
+  }
+
+  function renderAccentButtons(fullSentence) {
+    const escaped = escapeHtml(fullSentence);
+    return ACCENTS.map(a =>
+      `<button class="accent-btn" data-speak="${escaped}" data-accent="${a.code}" title="${a.label} English">${a.flag}<span class="accent-label">${a.label}</span></button>`
+    ).join('');
+  }
+
+  // Preload voices
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.getVoices();
+    window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.getVoices(); };
+  }
+
+  function renderResult() {
+    const answered = countAnswered();
+    const correct = countCorrect();
+    const wrong = answered - correct;
+    const percent = answered > 0 ? Math.round((correct / answered) * 100) : 0;
+
+    // Set completion timestamp on first arrival at result screen
+    if (!state.completedAt) {
+      state.completedAt = new Date().toISOString();
+      save();
+    }
+
+    let msg = '';
+    if (percent >= 90) msg = 'Excellent — 9割超え。この水準を維持。';
+    else if (percent >= 75) msg = 'Strong — 安定した実力。誤答を見直して完璧に。';
+    else if (percent >= 60) msg = 'Solid — 基礎は固まっている。弱点を潰していこう。';
+    else if (percent >= 40) msg = 'Building — 復習モードで間違いを潰そう。';
+    else msg = 'Starting out — まずは解説を読み込んで、再挑戦を。';
+
+    const wrongIndices = state.answers
+      .map((a, i) => (a && !a.correct) ? i : -1)
+      .filter(i => i >= 0);
+
+    const completedDate = new Date(state.completedAt);
+    const completedStr = completedDate.toLocaleString('ja-JP', {
+      year: 'numeric', month: 'long', day: 'numeric',
+      hour: '2-digit', minute: '2-digit'
+    });
+
+    app.innerHTML = `
+      ${renderHeader(false)}
+      <div class="student-banner">
+        <div>
+          <span class="student-name-jp">Student</span>
+          <span class="student-name">${escapeHtml(state.studentName || '(名前未入力)')}</span>
+          ${state.studentId ? `<span class="student-id"> · ${escapeHtml(state.studentId)}</span>` : ''}
+        </div>
+        <div class="student-datetime">${completedStr}</div>
+      </div>
+
+      <div class="submit-notice">
+        <div class="submit-notice-label">Submission · 提出方法</div>
+        <div class="submit-notice-body">
+          <strong>この画面全体をスクリーンショットして、先生に提出してください。</strong><br>
+          氏名・学籍番号・正答率・完了日時がこの1画面に収まっています。
+          <div class="submit-notice-caution">※ 下の「間違いを復習」を押すと別画面に移ります。スクリーンショットは<u>この画面</u>を撮ってください。</div>
+        </div>
+      </div>
+
+      <div class="results">
+        <div class="results-eyebrow">Result</div>
+        <h1 class="results-title">お疲れさまでした。</h1>
+
+        <div class="score-display">
+          <div class="score-big">${percent}<sup>%</sup></div>
+          <div class="score-label">accuracy</div>
+        </div>
+
+        <div class="score-breakdown">
+          <div class="score-cell">
+            <div class="score-cell-label">Answered</div>
+            <div class="score-cell-value">${answered} / ${QUESTIONS.length}</div>
+          </div>
+          <div class="score-cell correct">
+            <div class="score-cell-label">Correct</div>
+            <div class="score-cell-value">${correct}</div>
+          </div>
+          <div class="score-cell wrong">
+            <div class="score-cell-label">Wrong</div>
+            <div class="score-cell-value">${wrong}</div>
+          </div>
+        </div>
+
+        <p class="results-msg">${msg}</p>
+
+        <div class="btn-row">
+          ${wrong > 0 ? `<button class="btn" data-action="review">間違いを復習 <span class="btn-arrow">→</span></button>` : ''}
+          <button class="btn btn-ghost" data-action="restart">最初から解き直す</button>
+        </div>
+
+        <div class="footer">© Kaoruko Takechi 2026</div>
+      </div>
+    `;
+
+    app.querySelectorAll('[data-action]').forEach(el => {
+      el.addEventListener('click', () => {
+        const act = el.dataset.action;
+        if (act === 'review') {
+          state.reviewList = wrongIndices;
+          state.reviewPos = 0;
+          state.mode = 'review';
+          render();
+        } else if (act === 'restart') {
+          // Keep name/id but reset progress, re-shuffle for new attempt
+          state.answers = new Array(QUESTIONS.length).fill(null);
+          state.order = makeOrder();
+          state.index = 0;
+          state.answered = false;
+          state.completedAt = null;
+          state.mode = 'quiz';
+          save();
+          render();
+        }
+      });
+    });
+  }
+
+  function renderReview() {
+    if (state.reviewList.length === 0) {
+      state.mode = 'result';
+      render();
+      return;
+    }
+
+    const qPos = state.reviewList[state.reviewPos];   // position in shuffled order
+    const q = QUESTIONS[state.order[qPos]];            // resolve to actual question
+    const existing = state.answers[qPos];
+    const reviewTotal = state.reviewList.length;
+
+    app.innerHTML = `
+      ${renderHeader(false)}
+      <div class="review-header">
+        <div class="review-title">Review<span class="review-title-jp">間違えた問題の復習</span></div>
+        <div class="review-count">${state.reviewPos + 1} / ${reviewTotal}</div>
+      </div>
+      <div class="question-num">Question ${qPos + 1}</div>
+      <div class="question">${escapeHtml(q.q)}</div>
+      <div class="options">
+        ${q.opts.map((opt, i) => {
+          const num = i + 1;
+          const letter = String.fromCharCode(65 + i);
+          let cls = 'option dimmed';
+          if (num === q.ans) cls = 'option correct';
+          else if (existing && num === existing.chosen) cls = 'option wrong';
+          return `
+            <button class="${cls}" disabled>
+              <span class="option-letter">(${letter})</span>
+              <span class="option-text">${escapeHtml(opt)}</span>
+            </button>
+          `;
+        }).join('')}
+      </div>
+      ${renderFeedback(q, existing || {chosen: 0, correct: false})}
+      <div class="nav">
+        <button class="nav-quit" data-action="result">結果に戻る</button>
+        <div style="display:flex;gap:10px;">
+          ${state.reviewPos > 0 ? `<button class="btn btn-ghost" data-action="prev">← 前</button>` : ''}
+          ${state.reviewPos < reviewTotal - 1 ? `<button class="btn" data-action="next">次 →</button>` : `<button class="btn" data-action="result">完了 →</button>`}
+        </div>
+      </div>
+      <div class="footer">© Kaoruko Takechi 2026</div>
+    `;
+
+    app.querySelectorAll('[data-action]').forEach(el => {
+      el.addEventListener('click', () => {
+        const act = el.dataset.action;
+        if (act === 'next') { state.reviewPos++; render(); }
+        else if (act === 'prev') { state.reviewPos--; render(); }
+        else if (act === 'result') { state.mode = 'result'; render(); }
+      });
+    });
+
+    // Accent button handlers in review mode
+    app.querySelectorAll('.accent-btn').forEach(el => {
+      el.addEventListener('click', () => {
+        const text = el.dataset.speak;
+        const accent = el.dataset.accent;
+        if (text) speakSentence(text, accent);
+      });
+    });
+  }
+
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;')
+      .replace(/'/g,'&#39;');
+  }
+
+  // Initialize on load
+  document.addEventListener('DOMContentLoaded', () => {
+    state.answers = new Array(QUESTIONS.length).fill(null);
+    render();
+  });
+
+  // also run immediately in case DOMContentLoaded already fired
+  if (document.readyState === 'loading') {
+    // wait
+  } else {
+    state.answers = new Array(QUESTIONS.length).fill(null);
+    render();
+  }
+})();
+</script>
+</body>
+</html>
